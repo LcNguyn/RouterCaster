@@ -9,6 +9,8 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import FBSDKCoreKit
+import FBSDKShareKit
 
 @UIApplicationMain
 
@@ -23,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey(apikey)
         GMSPlacesClient.provideAPIKey(apikey)
-        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
 //        if let window = self.window {
 //            window.backgroundColor = UIColor.white
@@ -35,6 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            window.makeKeyAndVisible()
 //        }
         return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        let handled: Bool = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+        // Add any custom logic here.
+        return handled
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

@@ -9,6 +9,8 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import FBSDKLoginKit
+import FBSDKShareKit
 
 class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapViewDelegate {
 
@@ -31,11 +33,16 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
         
         self.view.backgroundColor = UIColor.init(displayP3Red: 0, green: 0, blue: 0, alpha: 0.1)
         
-//        scrollView.decelerationRate = .normal
         
-//        self.myPolyline.path = myPath
+        // Display data
+        routeDistanceLb.text = String((Double((GMSGeometryLength(myPath!)) / 1000) / 1.609).roundToDecimal(2))
+
+        timeTravelledLb.text = timeTravelled!.stringFromTimeInterval()
         
-        // OK version
+//        routeDistanceLb.text = "350"
+//        timeTravelledLb.text = "00:00:36"
+//
+//        // OK version
 //        var staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=\(Int(routeImage.frame.width))x\(Int(routeImage.frame.height))&path=weight:3|color:red|enc:s`seFdnbjVZEAQAa@De@DQX_@vBqClA{AFKTNnAbBbDnExAtBqD~EiBbCe@l@IDKBMCoBR}@Ha@Lm@RgBPWwDk@cJ[{E&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
         
         let staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=\(Int(routeImage.frame.width))x\(Int(routeImage.frame.height))&markers=color:green|label:S|\(Double((startMarker?.position.latitude)!)),\(Double((startMarker?.position.longitude)!))&markers=color:red|label:E|\(Double((endMarker?.position.latitude)!)),\(Double((endMarker?.position.longitude)!))&path=weight:3|color:red|enc:\(self.myPath!.encodedPath())&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
@@ -44,7 +51,6 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
 //        print(routeImage.frame.width)
         
         let imageSession = URLSession(configuration: .ephemeral)
-        
         if let url = NSURL(string: (staticMapUrl.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed))!) {
             
             print("Yessssssssssss")
@@ -52,7 +58,11 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
                 guard let imageData = imageData, let image = UIImage(data: imageData) else {return}
                 
                 DispatchQueue.main.async {
-                    self.routeImage.image = image
+                    
+                    let newImage = self.textToImage(drawText: "Route distance: \(self.routeDistanceLb.text!)\nTime Travelled: \(self.timeTravelledLb.text!)", inImage: image, atPoint: CGPoint(x: 0, y: 0))
+                    
+                    
+                    self.routeImage.image = newImage
     //                routeImage.frame = CGRect(x: 0, y: 50, width: 200, height: 200)
 //                    self.routeImage.contentMode = UIView.ContentMode.scaleAspectFit
                     //                    imageView.sizeToFit()
@@ -60,14 +70,7 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
             }
             task.resume()
         }
-        
-        
-        routeDistanceLb.text = String((Double((GMSGeometryLength(myPath!)) / 1000) / 1.609).roundToDecimal(2))
-        
-        timeTravelledLb.text = timeTravelled!.stringFromTimeInterval()
-        
         self.showAnimate()
-        
     }
     
     //    override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +81,7 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
     
     @IBAction func didCloseView(_ sender: Any) {
         
-        weak var pvc = self.parent as! TrackRouteViewController
+        weak var pvc = (self.parent as! TrackRouteViewController)
         self.dismiss(animated: true) {
             pvc?.dismiss(animated: true, completion: {
                 
@@ -87,8 +90,25 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
         
     }
     @IBAction func didPressShare(_ sender: Any) {
+        var content = FBSDKShareLinkContent()
+        content.contentURL = URL(string: "https://www.google.com")
         
+        let photo = FBSDKSharePhoto()
+        photo.image = #imageLiteral(resourceName: "Rectangle")
+        photo.isUserGenerated = true
+        photo.caption = "Testing testing"
         
+        var dialog = FBSDKShareDialog()
+        
+        let newContent = FBSDKSharePhotoContent()
+        
+        //        newContent.contentURL =  URL(string: "https://www.google.com")
+        //        newContent.contentURL = URL(string: "https://www.google.com")
+        newContent.photos = [photo]
+        dialog.fromViewController = self
+        dialog.shareContent = newContent
+        dialog.mode = FBSDKShareDialogMode.feedWeb
+        dialog.show()
     }
     @IBAction func didSaveRoute(_ sender: Any) {
         print("Yes")
@@ -126,7 +146,66 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
 //        self.routeImage.sizeToFit()
 //    }
     
-    
+    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
+//        let textColor = UIColor.black
+//        let textFont = UIFont(name: "Avenir-Medium", size: 20)!
+//
+//        let scale = UIScreen.main.scale
+//        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
+//
+//        let textFontAttributes = [
+//            NSAttributedString.Key.font: textFont,
+//            NSAttributedString.Key.foregroundColor: textColor,
+//            ] as [NSAttributedString.Key : Any]
+//        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+//
+//        let rect = CGRect(origin: point, size: image.size)
+////        UIColor.white.setFill()
+////        UIRectFill(rect)
+//
+//        text.draw(in: rect, withAttributes: textFontAttributes)
+//
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        // Fill rectangle
+//        let imageSize = image.size
+//        let scale: CGFloat = 0
+//        UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
+//
+//        image.draw(at: CGPoint.zero)
+//
+//        let rectangle = CGRect(x: 0, y: (imageSize.height/2) - 30, width: imageSize.width, height: 60)
+//
+//        UIColor.black.setFill()
+//        UIRectFill(rectangle)
+//
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+        
+        // New
+        let textColor = UIColor.black
+        let textFont = UIFont(name: "Avenir-Medium", size: 20)!
+        let imageSize = image.size
+        let scale: CGFloat = 0
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
+        
+        image.draw(at: CGPoint.zero)
+        let textFontAttributes = [
+            NSAttributedString.Key.font: textFont,
+            NSAttributedString.Key.foregroundColor: textColor,
+            ] as [NSAttributedString.Key : Any]
+        
+        let rectangle = CGRect(x: 0, y: 0, width: NSString(string: text).size(withAttributes: textFontAttributes).width, height: NSString(string: text).size(withAttributes: textFontAttributes).height)
+        UIColor.white.setFill()
+        UIRectFill(rectangle)
+        
+        text.draw(in: rectangle, withAttributes: textFontAttributes)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
 
 }
 

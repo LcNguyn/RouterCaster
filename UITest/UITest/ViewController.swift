@@ -185,7 +185,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 
         myMapView.camera = camera
         txtField.text=place.formattedAddress
-        chosenPlace = MyPlace(name: place.formattedAddress!, lat: lat, long: long)
+//        chosenPlace = MyPlace(name: place.formattedAddress!, lat: lat, long: long)
 
         marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -247,7 +247,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 
     let currentLocationMarker = GMSMarker()
     var locationManager = CLLocationManager()
-    var chosenPlace: MyPlace?
+//    var chosenPlace: MyPlace?
 
     let customMarkerWidth: Int = 50
     let customMarkerHeight: Int = 70
@@ -474,7 +474,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         return btn
     }()
     
-    
+    let previewDemoData = [(name: "Friend1", img: #imageLiteral(resourceName: "Rectangle"), lat: 10, long: 10), (name: "Friend2", img: #imageLiteral(resourceName: "initialpoint"), lat: 10, long: 10), (name: "Friend3", img: #imageLiteral(resourceName: "GPS_Button"), lat: 10, long: 10)]
+    // Should be call in accordance to the user dragging the screen (to save data)
+    func showFriendMarkers() {
+        myMapView.clear()
+        for i in 0..<3 {
+            let marker=GMSMarker()
+            let customMarker = CustomMarkerView(image: previewDemoData[i].img, borderColor: UIColor.darkGray, tag: i)
+            marker.iconView=customMarker
+            marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(previewDemoData[i].lat), longitude: CLLocationDegrees(previewDemoData[i].long))
+            marker.map = self.myMapView
+        }
+    }
     
 
 //    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {

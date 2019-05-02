@@ -12,5 +12,9 @@ target 'UITest' do
   pod 'GoogleMaps'
   pod 'GooglePlacesAPI'
   pod 'SwiftyJSON'
-
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
+  pod 'FBSDKPlacesKit'
+  
 end
