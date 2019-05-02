@@ -27,7 +27,7 @@ class DesignableTextField: UITextField {
 }
 
 extension UIView {
-    
+
     @IBInspectable
     var cornerRadius: CGFloat {
         get {
@@ -37,7 +37,7 @@ extension UIView {
             layer.cornerRadius = newValue
         }
     }
-    
+
     @IBInspectable
     var borderWidth: CGFloat {
         get {
@@ -47,7 +47,7 @@ extension UIView {
             layer.borderWidth = newValue
         }
     }
-    
+
     @IBInspectable
     var borderColor: UIColor? {
         get {
@@ -64,7 +64,7 @@ extension UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var shadowRadius: CGFloat {
         get {
@@ -74,7 +74,7 @@ extension UIView {
             layer.shadowRadius = newValue
         }
     }
-    
+
     @IBInspectable
     var shadowOpacity: Float {
         get {
@@ -84,7 +84,7 @@ extension UIView {
             layer.shadowOpacity = newValue
         }
     }
-    
+
     @IBInspectable
     var shadowOffset: CGSize {
         get {
@@ -94,7 +94,7 @@ extension UIView {
             layer.shadowOffset = newValue
         }
     }
-    
+
     @IBInspectable
     var shadowColor: UIColor? {
         get {
@@ -137,7 +137,8 @@ struct MyPlace {
 //}
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UITextFieldDelegate, GMSAutocompleteTableDataSourceDelegate, GMSAutocompleteViewControllerDelegate  {
+class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UITextFieldDelegate, GMSAutocompleteTableDataSourceDelegate, GMSAutocompleteViewControllerDelegate
+{
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
 //        let lat = place.coordinate.latitude
 //        let long = place.coordinate.longitude
@@ -155,15 +156,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 //
 //        self.dismiss(animated: false, completion: nil) // dismiss after place selected
     }
-    
+
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         
     }
-    
+
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        
+
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? DirectionViewController {
             vc.camera = self.myMapView.camera
@@ -172,48 +173,48 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             vc.endMarker = marker.copy() as! GMSMarker
         }
     }
-    
+
     func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
-        
+
         let lat = place.coordinate.latitude
         let long = place.coordinate.longitude
-        
-        
+
+
         let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
-        
-        
+
+
         myMapView.camera = camera
         txtField.text=place.formattedAddress
         chosenPlace = MyPlace(name: place.formattedAddress!, lat: lat, long: long)
-        
+
         marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
         marker.title = place.name ?? ""
         marker.snippet = "\(place.formattedAddress!)"
         marker.map = self.myMapView
-        
+
         txtField.resignFirstResponder()
         placeTitle.text = place.name
         placeAddress.text = place.formattedAddress
         placeInfo.isHidden = false
         tableView.isHidden = true
-        
+
     }
-    
+
     func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
-        
+
     }
-    
+
     func didRequestAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         tableView.reloadData()
     }
-    
+
     func didUpdateAutocompletePredictions(for tableDataSource: GMSAutocompleteTableDataSource) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         tableView.reloadData()
     }
-    
+
     var marker = GMSMarker()
     @IBOutlet weak var txtField: UITextField!
     @IBOutlet weak var placeInfo: UIView!
@@ -223,8 +224,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     //    var tableView: UITableView = UITableView(frame: CGRect(x: 12, y: 80, width: 390, height: 500))
     @IBOutlet weak var placeTitle: UILabel!
     @IBOutlet weak var placeAddress: UILabel!
-    
-    
+
+
     @IBOutlet weak var menuBtn: UIButton!
     @IBAction func didPressMenuBtn(_ sender: UIButton) {
         switch sender.tag {
@@ -238,60 +239,69 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             placeInfo.isHidden = true
             marker.map = nil
             menuBtn.tag = 1
-            menuBtn.setImage(UIImage(named: "menu"), for: UIControl.State.normal)
+            menuBtn.setImage(UIImage(named: "menu-1"), for: UIControl.State.normal)
             break
         default: break
         }
     }
-    
+
     let currentLocationMarker = GMSMarker()
     var locationManager = CLLocationManager()
     var chosenPlace: MyPlace?
 
     let customMarkerWidth: Int = 50
     let customMarkerHeight: Int = 70
-    
+
     var tableData=[String]()
 //    var fetcher: GMSAutocompleteFetcher?
     let tableDataSource = GMSAutocompleteTableDataSource()
 
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = UIColor.white
         myMapView.delegate=self
 //        tableView.isHidden = true
-        
-        
+
+
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
-        
+
         setupViews()
 
         initGoogleMaps()
-        
+
         txtField.addTarget(self, action: #selector(ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         txtField.delegate = self
-        
+
         tableDataSource.delegate = self
-        
+
         tableView.delegate = tableDataSource
         tableView.dataSource = tableDataSource
         tableDataSource.tableCellBackgroundColor = UIColor.white
         tableDataSource.tableCellSeparatorColor = UIColor(red:0.32, green:0.67, blue:0.69, alpha:1.0)
         tableDataSource.primaryTextColor = UIColor(red:0.25, green:0.43, blue:0.57, alpha:1.0)
         tableDataSource.secondaryTextColor = UIColor(red:0.25, green:0.43, blue:0.57, alpha:1.0)
-        
-        
+
+
         tableView.reloadData()
         placeInfo.backgroundColor = UIColor.white
 //        let newView = UIView(frame: CGRect(x: 100, y: 100, width: 40, height: 80))
 //        self.view.addSubview(newView)
 ////        newView.backgroundColor = UIColor.white
+        
     }
+
+//    override func viewDidAppear(_ animated: Bool) {
+//        let myImageView = UIImageView(frame: CGRect(x: 100, y: 200, width: 40, height: 40))
+//        self.myMapView.addSubview(myImageView)
+//        //        let myView = UIView(frame: CGRect(x: 100, y: 200, width: 40, height: 40))
+//        //        myView.backgroundColor = .black
+//        myImageView.image = myMapView.asImage()
+//    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         menuBtn.tag = 2
@@ -299,7 +309,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         print("Yes")
         textFieldDidChange(textField)
     }
-    
+
     @objc func textFieldDidChange(_ textField: UITextField) {
         tableDataSource.sourceTextHasChanged(textField.text!)
 
@@ -309,7 +319,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             tableView.isHidden = false
         }
     }
-    
+
 //    func numberOfSections(in tableView: UITableView) -> Int {
 //        return 1
 //    }
@@ -336,15 +346,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 //
 //        return cell
 //    }
-    
-    
-    
+
+
+
     func initGoogleMaps() {
         let camera = GMSCameraPosition.camera(withLatitude: 28.7041, longitude: 77.1025, zoom: 17.0)
         self.myMapView.camera = camera
         self.myMapView.delegate = self
         self.myMapView.isMyLocationEnabled = true
-        
+
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -361,7 +371,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 
         self.myMapView.animate(to: camera)
 //        self.myMapView = GMSMapView.map(withFrame: self.view.bounds, camera: camera)
-        
+
     }
 
     @objc func btnMyLocationAction() {
@@ -371,53 +381,60 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         }
     }
 
-
+    @objc func btnFriendDisplayAction() {
+    }
+    
     func setupViews() {
 //        myMapView.frame = CGRect(x: 0, y: 49, width: 50, height: 10)
 //        self.view.addSubview(myMapView)
-        
+
         // Remove unneccasry gestures (for textfield to work)
         for (index,gesture) in myMapView.gestureRecognizers!.enumerated() {
             if index == 0 {
                 myMapView.removeGestureRecognizer(gesture)
             }
         }
-        
+
         menuBtn.tag = 1  // Set tag to 1 for homescreen
         self.myMapView.addSubview(myTextField)
         self.myMapView.addSubview(tableView)
 //        tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 120).isActive=true
 //        tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 12).isActive=true
 //        tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -12).isActive=true
-        
-        
+
+
 //        tableView.widthAnchor.constraint(equalToConstant: 390).isActive=true
 //        tableView.heightAnchor.constraint(equalToConstant: 500).isActive=true
 
 //        myMapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 60).isActive=true
-        
+
 //        myTextField.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 52).isActive = true
 //
 //        myTextField.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 12).isActive = true
 //
 //        myTextField.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -12).isActive = true
-        
+
         myMapView.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
         myMapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
         myMapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive=true
         myMapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 60).isActive=true
 
         self.myMapView.addSubview(btnMyLocation)
-        btnMyLocation.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).isActive=true
+        btnMyLocation.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -160).isActive=true
         btnMyLocation.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive=true
         btnMyLocation.widthAnchor.constraint(equalToConstant: 66).isActive=true
         btnMyLocation.heightAnchor.constraint(equalTo: btnMyLocation.widthAnchor).isActive=true
         
-        
+        self.myMapView.addSubview(btnFriendDisplay)
+        btnFriendDisplay.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80).isActive=true
+        btnFriendDisplay.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive=true
+        btnFriendDisplay.widthAnchor.constraint(equalToConstant: 66).isActive=true
+        btnFriendDisplay.heightAnchor.constraint(equalTo: btnMyLocation.widthAnchor).isActive=true
+
 //        btnMyLocation.imageView?.heightAnchor.constraint(equalToConstant: 30)
-        
+
         self.myMapView.addSubview(placeInfo)
-        
+
     }
 
 //    let myMapView: GMSMapView = {
@@ -441,6 +458,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         btn.translatesAutoresizingMaskIntoConstraints=false
         return btn
     }()
+    
+    let btnFriendDisplay: UIButton = {
+        let btn=UIButton()
+        btn.backgroundColor = UIColor.white
+        btn.setImage(#imageLiteral(resourceName: "route"), for: .normal)
+        //        btn.layer.frame = CGRect(x: 336, y: 686, width: 66, height: 66)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        btn.layer.cornerRadius = 30
+        btn.clipsToBounds=true
+        btn.tintColor = UIColor.gray
+        btn.imageView?.tintColor=UIColor.gray
+        btn.addTarget(self, action: #selector(btnFriendDisplayAction), for: .touchUpInside)
+        btn.translatesAutoresizingMaskIntoConstraints=false
+        return btn
+    }()
+    
+    
+    
 
 //    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
 //        //        guard let customMarkerView = marker.iconView as? CustomMarkerView else { return false }
@@ -466,6 +501,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 //    }
 
 }
+
+
+
 
 //extension ViewController: GMSAutocompleteFetcherDelegate {
 //    func didAutocomplete(with predictions: [GMSAutocompletePrediction]) {

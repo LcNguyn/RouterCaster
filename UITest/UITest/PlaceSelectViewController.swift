@@ -11,19 +11,26 @@ import GoogleMaps
 import GooglePlaces
 
 protocol PlaceSelectViewControllerDelegate {
-    func changedPlace(newPlaceMarker: GMSMarker);
+    func changedPlace(newPlaceMarker: GMSMarker, isEditingStartPoint: Bool);
 }
 
-class PlaceSelectViewController: UIViewController, GMSMapViewDelegate, GMSAutocompleteTableDataSourceDelegate, UITextFieldDelegate {
+class PlaceSelectViewController: UIViewController, GMSMapViewDelegate, GMSAutocompleteTableDataSourceDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
 
+    var camera: GMSCameraPosition = GMSCameraPosition()
     var delegate: PlaceSelectViewControllerDelegate?
     @IBOutlet weak var myMapView: GMSMapView!
     @IBOutlet weak var searchBar: DesignableView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtField: UITextField!
+    @IBOutlet weak var yourLocationBtn: UIButton!
+    
+    
     let tableDataSource = GMSAutocompleteTableDataSource()
+    var currentMarker: GMSMarker = GMSMarker()
+    var isEditingStartPoint = true
     
     @IBAction func didPressBack(_ sender: UIButton) {
+        txtField.resignFirstResponder()
         self.dismiss(animated: true) {
         }
     }
@@ -32,7 +39,6 @@ class PlaceSelectViewController: UIViewController, GMSMapViewDelegate, GMSAutoco
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
         
         // View setup
         // Remove unneccasry gestures (for textfield to work)
@@ -43,22 +49,41 @@ class PlaceSelectViewController: UIViewController, GMSMapViewDelegate, GMSAutoco
                 myMapView.removeGestureRecognizer(gesture)
             }
         }
+        myMapView.camera = self.camera
         
         // TxtField set up
         txtField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         txtField.delegate = self
         
+        if (!isEditingStartPoint) {
+            yourLocationBtn.heightAnchor.constraint(equalToConstant: 0).isActive = true
+        } else {
+            self.myMapView.addSubview(yourLocationBtn)
+        }
+        
+        if currentMarker.title == "Your location" {
+            txtField.text = ""
+        } else {
+            txtField.text = currentMarker.title
+        }
+    
         tableDataSource.delegate = self
+        
+//        tableView.addSubview(subView)
+//
+//        insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         
         tableView.delegate = tableDataSource
         tableView.dataSource = tableDataSource
-//        tableDataSource.tableCellBackgroundColor = UIColor.white
+        tableDataSource.tableCellBackgroundColor = UIColor.white
         tableDataSource.tableCellSeparatorColor = UIColor(red:0.32, green:0.67, blue:0.69, alpha:1.0)
         tableDataSource.primaryTextColor = UIColor(red:0.25, green:0.43, blue:0.57, alpha:1.0)
         tableDataSource.secondaryTextColor = UIColor(red:0.25, green:0.43, blue:0.57, alpha:1.0)
         
         
         tableView.reloadData()
+        
+        txtField.becomeFirstResponder()
     }
     
 //    override func viewDidAppear(_ animated: Bool) {
@@ -66,18 +91,27 @@ class PlaceSelectViewController: UIViewController, GMSMapViewDelegate, GMSAutoco
 //        txtField.becomeFirstResponder()
 //    }
     
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
+        
         tableDataSource.sourceTextHasChanged(textField.text!)
         
-//        tableView.beginUpdates()
-//        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-//        tableView.endUpdates()
+//            tableView.beginUpdates()
+//
+//            tableView.endUpdates()
+
+//
         
-//        if (textField.text?.count == 0) {
-//            tableView.isHidden = true
-//        } else {
-//            tableView.isHidden = false
-//        }
+        if (textField.text?.count == 0) {
+            tableView.isHidden = true
+        } else {
+            tableView.isHidden = false
+        }
+        
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldDidChange(textField)
     }
     
     func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
@@ -89,11 +123,24 @@ class PlaceSelectViewController: UIViewController, GMSMapViewDelegate, GMSAutoco
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
         marker.title = place.name ?? ""
         marker.snippet = "\(place.formattedAddress!)"
-        delegate?.changedPlace(newPlaceMarker: marker)
+        
+        
+        delegate?.changedPlace(newPlaceMarker: marker, isEditingStartPoint: isEditingStartPoint)
         
         self.dismiss(animated: true) {
         }
         
+    }
+    
+    @IBAction func didSelectCurLocation(_ sender: UIButton) {
+        let marker = GMSMarker()
+        marker.title = "Your location"
+        marker.map = nil
+        
+        txtField.resignFirstResponder()
+        delegate?.changedPlace(newPlaceMarker: marker, isEditingStartPoint: isEditingStartPoint)
+        self.dismiss(animated: true) {
+        }
     }
     
     func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
