@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>557436241039-t6e8nrhn5s7e4286c7cf6mvprga5i8kp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.557436241039-t6e8nrhn5s7e4286c7cf6mvprga5i8kp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCMQmDN1HPhIuJtTdStHMe2Yi0fiWapew8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>557436241039</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>UITest.UITest</string>
+	<key>PROJECT_ID</key>
+	<string>route-caster</string>
+	<key>STORAGE_BUCKET</key>
+	<string>route-caster.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:557436241039:ios:a3fd4ce137cf7b52</string>
+	<key>DATABASE_URL</key>
+	<string>https://route-caster.firebaseio.com</string>
+</dict>
+</plist>
