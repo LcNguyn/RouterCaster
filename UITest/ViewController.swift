@@ -178,7 +178,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? DirectionViewController {
-            vc.camera = self.myMapView.camera
+            vc.camera = self.myMapView.camera.copy() as! GMSCameraPosition
             
             // Pass the selected place to next screen
             vc.endMarker = marker.copy() as! GMSMarker
@@ -522,7 +522,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 
         menuBtn.tag = 1  // Set tag to 1 for homescreen
         self.myMapView.addSubview(myTextField)
-        self.myMapView.addSubview(tableView)
+//        self.myMapView.addSubview(tableView)
 //        tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 120).isActive=true
 //        tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 12).isActive=true
 //        tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -12).isActive=true
@@ -567,6 +567,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         colorPickerView.colors = [#colorLiteral(red: 0.862745098, green: 0.5568627451, blue: 0.5019607843, alpha: 1),#colorLiteral(red: 0.9098039216, green: 0.6509803922, blue: 0.4941176471, alpha: 1), #colorLiteral(red: 0.8196078431, green: 0.7882352941, blue: 0.5725490196, alpha: 1), #colorLiteral(red: 0.5176470588, green: 0.7960784314, blue: 0.7568627451, alpha: 1), #colorLiteral(red: 0.4549019608, green: 0.6901960784, blue: 0.862745098, alpha: 1), #colorLiteral(red: 1, green: 0.7265317578, blue: 0.7629562013, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1), #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1)]
         
         self.myMapView.addSubview(placeInfo)
+        self.myMapView.addSubview(tableView)
+
     }
     
 //    override func viewDidAppear(_ animated: Bool) {

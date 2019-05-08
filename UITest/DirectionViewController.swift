@@ -249,11 +249,15 @@ class DirectionViewController: UIViewController, GMSMapViewDelegate, CLLocationM
 //                    self.myMapView.animate(with:GMSCameraUpdate.fit(bounds, withPadding: 90.0))
                     
                     var bounds = GMSCoordinateBounds()
-
+//
                     for index in 1...path!.count() {
                         bounds = bounds.includingCoordinate(path!.coordinate(at: index))
                     }
-                    self.myMapView.animate(with: GMSCameraUpdate.fit(bounds))
+                    self.myMapView.animate(with: GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)))
+                    
+//                    let bounds = GMSCoordinateBounds(coordinate: startLocation.coordinate, coordinate: endLocation.coordinate)
+//                    let camera = self.myMapView.camera(for: bounds, insets: UIEdgeInsets())!
+//                    self.myMapView.camera = camera
                     
                     
                     // Set the label

@@ -11,7 +11,6 @@
 		575BD4F1227AAFAC0082E236 /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575BD4F0227AAFAC0082E236 /* CustomMarkerView.swift */; };
 		578768A5226784370063806D /* DirectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578768A4226784370063806D /* DirectionViewController.swift */; };
 		578E41142278090500C66E6A /* FinishRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578E41132278090500C66E6A /* FinishRouteViewController.swift */; };
-		57919F7A2282ED58004B169B /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57919F792282ED58004B169B /* TestView.swift */; };
 		57A1188B227F4A6A00936EEC /* FriendLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A11888227F4A6A00936EEC /* FriendLocationCell.swift */; };
 		57A1188C227F4A6A00936EEC /* FriendRouteLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A11889227F4A6A00936EEC /* FriendRouteLocationCell.swift */; };
 		57A1188D227F4A6A00936EEC /* ShowFriendRouteLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A1188A227F4A6A00936EEC /* ShowFriendRouteLocationViewController.swift */; };
@@ -33,7 +32,6 @@
 		575BD4F0227AAFAC0082E236 /* CustomMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
 		578768A4226784370063806D /* DirectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionViewController.swift; sourceTree = "<group>"; };
 		578E41132278090500C66E6A /* FinishRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishRouteViewController.swift; sourceTree = "<group>"; };
-		57919F792282ED58004B169B /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		57A11888227F4A6A00936EEC /* FriendLocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendLocationCell.swift; sourceTree = "<group>"; };
 		57A11889227F4A6A00936EEC /* FriendRouteLocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRouteLocationCell.swift; sourceTree = "<group>"; };
 		57A1188A227F4A6A00936EEC /* ShowFriendRouteLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowFriendRouteLocationViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 			children = (
 				57B9E5AC22630D2300ACAA6E /* AppDelegate.swift */,
 				57B9E5AE22630D2300ACAA6E /* ViewController.swift */,
-				57919F792282ED58004B169B /* TestView.swift */,
 				575BD4F0227AAFAC0082E236 /* CustomMarkerView.swift */,
 				57B9E5B022630D2300ACAA6E /* Main.storyboard */,
 				57B9E5B322630D2400ACAA6E /* Assets.xcassets */,
@@ -323,7 +320,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57919F7A2282ED58004B169B /* TestView.swift in Sources */,
 				57CAE61A2276CE16004B68A7 /* TrackRouteViewController.swift in Sources */,
 				578E41142278090500C66E6A /* FinishRouteViewController.swift in Sources */,
 				575BD4F1227AAFAC0082E236 /* CustomMarkerView.swift in Sources */,
