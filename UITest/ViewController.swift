@@ -309,14 +309,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             self.present(alert, animated: true, completion: nil)
             break
         case .authorizedWhenInUse, .authorizedAlways:
+            isLocationEnabled = true
             locationManager.startUpdatingLocation()
             locationManager.startMonitoringSignificantLocationChanges()
             break
         }
     }
     
+    var isLocationEnabled = false
     override func viewDidAppear(_ animated: Bool) {
-        enableBasicLocationServices()
+        if (!isLocationEnabled) {
+            enableBasicLocationServices()
+        }
     }
     
     override func viewDidLoad() {

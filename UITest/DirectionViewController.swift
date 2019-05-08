@@ -94,6 +94,11 @@ class DirectionViewController: UIViewController, GMSMapViewDelegate, CLLocationM
         }
     }
     
+    override func viewDidLayoutSubviews() {
+//        let bounds = GMSCoordinateBounds(path: polyline.path!)
+//        self.myMapView.animate(with:GMSCameraUpdate.fit(bounds, withPadding: 80.0))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -240,15 +245,15 @@ class DirectionViewController: UIViewController, GMSMapViewDelegate, CLLocationM
                     self.polyline.strokeColor = UIColor.red
                     self.polyline.map = self.myMapView
                                         
-                    let bounds = GMSCoordinateBounds(path: path!)
-                    self.myMapView.animate(with:GMSCameraUpdate.fit(bounds, withPadding: 80.0))
+//                    let bounds = GMSCoordinateBounds(path: path!)
+//                    self.myMapView.animate(with:GMSCameraUpdate.fit(bounds, withPadding: 90.0))
                     
-//                    var bounds = GMSCoordinateBounds()
-//
-//                    for index in 1...path!.count() {
-//                        bounds = bounds.includingCoordinate(path!.coordinate(at: index))
-//                    }
-//                    self.myMapView.animate(with: GMSCameraUpdate.fit(bounds))
+                    var bounds = GMSCoordinateBounds()
+
+                    for index in 1...path!.count() {
+                        bounds = bounds.includingCoordinate(path!.coordinate(at: index))
+                    }
+                    self.myMapView.animate(with: GMSCameraUpdate.fit(bounds))
                     
                     
                     // Set the label
