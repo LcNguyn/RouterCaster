@@ -1,5 +1,5 @@
 //
-//  NewViewController.swift
+//  MapSettingViewController.swift
 //  Setting
 //
 //  Created by tang quang an on 5/7/19.
@@ -9,7 +9,7 @@
 import UIKit
 import DLRadioButton
 
-class NewViewController: UIViewController {
+class MapSettingViewController: UIViewController {
 
     @IBAction func didPressBack(_ sender: Any) {
         let transition = CATransition()
