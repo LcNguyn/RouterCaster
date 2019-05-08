@@ -285,7 +285,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             mapView(myMapView, didTap: tappedMarker)
         }
     }
-
+    
     func enableBasicLocationServices() {
         locationManager.delegate = self
         
