@@ -173,6 +173,10 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
             SparkService.dismissHud(self.hud, text: "Success", detailText: "Successfully signed in with Facebook", delay: 1)
             let when = DispatchTime.now() + 3
             
+            for view in self.view.subviews {
+                view.removeFromSuperview()
+            }
+            
             let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "viewControllerID") as! ViewController
             self.addChild(mainViewVC)
             mainViewVC.view.frame = self.view.frame

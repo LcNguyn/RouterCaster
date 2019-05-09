@@ -33,6 +33,7 @@
 		1897CCF5228018EF00A3B740 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1897CCEE228018EF00A3B740 /* LoginViewController.swift */; };
 		189CAA9F227D4725003F22D5 /* FriendLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189CAA9E227D4725003F22D5 /* FriendLocationCell.swift */; };
 		18BB04E4227B1B9100FE02D7 /* AddFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BB04E3227B1B9100FE02D7 /* AddFriendCell.swift */; };
+		18BBAD272283EBE600340446 /* Menu2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAD262283EBE600340446 /* Menu2ViewController.swift */; };
 		18E8DB63226F718C0080E173 /* MenuSideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E8DB62226F718C0080E173 /* MenuSideBarViewController.swift */; };
 		9B08E4BD2282A6FC00E8FE28 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B08E4BC2282A6FC00E8FE28 /* User.swift */; };
 		BC582C9CC94FD1A4438DF94A /* Pods_MainCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01134256A9B086AE2B3D2A2C /* Pods_MainCode.framework */; };
@@ -68,6 +69,7 @@
 		1897CCEE228018EF00A3B740 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		189CAA9E227D4725003F22D5 /* FriendLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendLocationCell.swift; sourceTree = "<group>"; };
 		18BB04E3227B1B9100FE02D7 /* AddFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendCell.swift; sourceTree = "<group>"; };
+		18BBAD262283EBE600340446 /* Menu2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu2ViewController.swift; sourceTree = "<group>"; };
 		18E8DB62226F718C0080E173 /* MenuSideBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSideBarViewController.swift; sourceTree = "<group>"; };
 		5128EB11BAD5ABFDAECE67AD /* Pods-MainCode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MainCode.release.xcconfig"; path = "Target Support Files/Pods-MainCode/Pods-MainCode.release.xcconfig"; sourceTree = "<group>"; };
 		9B08E4BC2282A6FC00E8FE28 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				1897CCE8228018EF00A3B740 /* SignUpViewController.swift */,
 				18E8DB62226F718C0080E173 /* MenuSideBarViewController.swift */,
+				18BBAD262283EBE600340446 /* Menu2ViewController.swift */,
 				18009DEA226D318800B13A21 /* ViewController.swift */,
 				1880D1A422727EF70022B8AD /* StatisticsViewController.swift */,
 				1897CCED228018EF00A3B740 /* FogotPasswordViewController.swift */,
@@ -202,6 +205,9 @@
 		18009DDD226D318800B13A21 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					321,
+				);
 				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Kien;
@@ -370,6 +376,7 @@
 				183CD9E4227037CD00129F7A /* SparkModels.swift in Sources */,
 				189CAA9F227D4725003F22D5 /* FriendLocationCell.swift in Sources */,
 				1864EEA0226DEEEC00FE350D /* CustomCell.swift in Sources */,
+				18BBAD272283EBE600340446 /* Menu2ViewController.swift in Sources */,
 				1842F2BD227D089800F38DE6 /* ShowFriendRouteLocationViewController.swift in Sources */,
 				1883C60A226EA4ED00760059 /* CustomCellRequest.swift in Sources */,
 				1880D1A522727EF70022B8AD /* StatisticsViewController.swift in Sources */,

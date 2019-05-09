@@ -8,8 +8,17 @@
 
 import UIKit
 import Charts
+import JGProgressHUD
 
 class StatisticsViewController: UIViewController, UIScrollViewDelegate {
+    
+    let hud: JGProgressHUD = {
+        let hud = JGProgressHUD(style: .light)
+        hud.interactionType = .blockAllTouches
+        return hud
+    }()
+    
+    
     @IBOutlet weak var segmentsView: UISegmentedControl!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mainScrollView: UIScrollView!
@@ -28,6 +37,20 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var realChart: LineChartView!
     @IBOutlet weak var realChartMonthly: LineChartView!
     
+    @IBOutlet weak var defaultProfile: UIImageView!
+    @IBOutlet weak var profilebarname: UILabel!
+    @IBOutlet weak var mainDefaultProfile: UIImageView!
+    @IBOutlet weak var mainprofilebarname: UILabel!
+    
+    
+    @IBOutlet weak var mainViewSideBar: UIView!
+    @IBOutlet weak var testSideBar: UIView!
+    @IBOutlet weak var peopleIcon: UIImageView!
+    @IBOutlet weak var friendlistText: UILabel!
+    @IBOutlet weak var statisticsIcon: UIImageView!
+    @IBOutlet weak var statisticsText: UILabel!
+    @IBOutlet weak var viewMoveMagic: UIView!
+    
     
     var yNumbersOfAverageDistance: [Double] = [300,300,700,0,500,500,100,100,300,100,300]
     var yNumbersOfAverageTime: [Double] = [100,50,300,100,300,300,300,700,100,100,1000]
@@ -43,7 +66,18 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchCurrentUser()
 
+//        self.mainScrollView.frame.origin.x += self.mainScrollView.frame.size.width
+        //self.view.removeFromSuperview()
+        
+        self.view.frame.origin.x += self.view.frame.size.width
+        statisticsIcon.tintColor = UIColor(red: CGFloat(255)/255.0, green: CGFloat(255)/255.0, blue: CGFloat(255)/255.0, alpha: 1)
+        peopleIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+        
+        showStatisticsView()
+        testSideBar.frame.origin.x -= testSideBar.frame.size.width
+        
         realChart.chartDescription?.text = ""
         
         //Weekly Chart
@@ -72,6 +106,91 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
         updateGraph()
         
     }
+    
+    func fetchCurrentUser() {
+        
+        Spark.fetchCurrentSparkUser { (message, err, sparkUser) in
+            if let err = err {
+                SparkService.dismissHud(self.hud, text: "Error", detailText: "\(message) \(err.localizedDescription)", delay: 0)
+                return
+            }
+            guard let sparkUser = sparkUser else {
+                SparkService.dismissHud(self.hud, text: "Error", detailText: "Failed to fetch user", delay: 0 )
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.defaultProfile.loadImageUsingCacheWithUrlString(sparkUser.profileImageUrl)
+                self.mainDefaultProfile.loadImageUsingCacheWithUrlString(sparkUser.profileImageUrl)
+                self.profilebarname.text = sparkUser.name
+                self.mainprofilebarname.text = sparkUser.name
+                
+            }
+            
+            SparkService.dismissHud(self.hud, text: "Success", detailText: "Successfully fetched user", delay: 0)
+            
+        }
+    }
+    
+    @IBAction func menuSideBar(_ sender: UIButton) {
+        showTestSideBar()
+    }
+    
+    func showTestSideBar() {
+        mainViewSideBar.isHidden = false
+        testSideBar.isHidden = false
+        UIView.animate(withDuration: 0.5) {
+            self.testSideBar.frame.origin.x += self.testSideBar.frame.size.width
+        }
+    }
+    
+    @IBAction func backButton(_ sender: UIButton) {
+        closeTestSideBar()
+    }
+    
+    func closeTestSideBar() {
+        //testSideBar.frame.origin.x = testSideBar.frame.origin.x
+        UIView.animate(withDuration: 0.5, animations: {
+            self.testSideBar.frame.origin.x -= self.testSideBar.frame.size.width
+        }) { completed in
+            self.testSideBar.isHidden = true
+            self.mainViewSideBar.isHidden = true
+        }
+    }
+    
+    @IBAction func onClickMoveToFriendlist(_ sender: UIButton) {
+        closeSideBarToMoveToFriendlist()
+    }
+    
+    func closeSideBarToMoveToFriendlist() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.viewMoveMagic.frame.origin.y = self.peopleIcon.frame.origin.y - 13
+            self.statisticsIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+            self.statisticsText.textColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+            self.peopleIcon.tintColor = UIColor(red: CGFloat(255)/255.0, green: CGFloat(255)/255.0, blue: CGFloat(255)/255.0, alpha: 1)
+            self.friendlistText.textColor = UIColor(red: CGFloat(255)/255.0, green: CGFloat(255)/255.0, blue: CGFloat(255)/255.0, alpha: 1)
+        }) { completed in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.testSideBar.frame.origin.x -= self.testSideBar.frame.size.width
+            }) { completed in
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.testSideBar.isHidden = true
+                    self.mainViewSideBar.isHidden = true
+                }, completion: { completed in
+                    for view in self.view.subviews {
+                        view.removeFromSuperview()
+                    }
+                    let friendlistVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "viewControllerID") as! ViewController
+                    self.addChild(friendlistVC)
+                    friendlistVC.view.frame = self.view.frame
+                    self.view.addSubview(friendlistVC.view)
+                    friendlistVC.didMove(toParent: self)
+                })
+            }
+        }
+        
+    }
+    
     
     func updateGraph() {
         //Weekly Chart
@@ -160,7 +279,9 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.view.frame.origin.x += self.view.frame.size.width
+//        self.view.frame.origin.x += self.view.frame.size.width
+        
+//        self.mainScrollView.frame.origin.x += self.mainScrollView.frame.size.width
         
 //        compareView.frame.origin.x -= compareView.frame.origin.x
 //        self.totalDistanceView.frame.origin.x -= self.view.frame.size.width
@@ -172,7 +293,7 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidAppear(animated)
         
         //Fire Animation
-        showStatisticsView()
+        //showStatisticsView()
         showCompareView()
         showTotalDistanceView()
         showTotalTimeView()
@@ -184,8 +305,9 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func showStatisticsView() {
-        UIView.animate(withDuration: 0.1) {
+        UIView.animate(withDuration: 0.5) {
 //            self.view.alpha = 1
+//            self.mainScrollView.frame.origin.x -= self.mainScrollView.frame.size.width
             self.view.frame.origin.x -= self.view.frame.size.width
         }
     }

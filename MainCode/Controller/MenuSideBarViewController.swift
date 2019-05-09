@@ -26,6 +26,8 @@ class MenuSideBarViewController: UIViewController {
     @IBOutlet weak var profilebarname: UILabel!
 
     
+    var finalName = ""
+    
     let hud: JGProgressHUD = {
         let hud = JGProgressHUD(style: .light)
         hud.interactionType = .blockAllTouches
@@ -35,10 +37,30 @@ class MenuSideBarViewController: UIViewController {
         super.viewDidLoad()
         fetchCurrentUser()
 
-
-          setupViews()
+        //testLabel.text = finalName
+        //setupViews()
         // Do any additional setup after loading the view.
-
+        
+//        if finalName == "friendlist" {
+//            self.viewMoveMagic.frame.origin.y = self.peopleIcon.frame.origin.y - 13
+//        } else if finalName == "statistic" {
+//            self.viewMoveMagic.frame.origin.y = self.statisticsIcon.frame.origin.y - 10
+//            self.statisticsIcon.tintColor = .white
+//            self.statisticsText.textColor = .white
+//            self.peopleIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+//            self.friendListText.textColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+//        }
+//
+        self.statisticsIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+        sideBar.frame.origin.x -= sideBar.frame.size.width
+        self.view.backgroundColor = UIColor.init(displayP3Red: 0, green: 0, blue: 0, alpha: 0.05)
+        
+        
+        
+        //Fire animations
+        showMenuSideBar()
+        
+        
     }
     
  
@@ -133,18 +155,12 @@ class MenuSideBarViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchCurrentUser()
         
-        self.statisticsIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
-        sideBar.frame.origin.x -= sideBar.frame.size.width
-        self.view.backgroundColor = UIColor.init(displayP3Red: 0, green: 0, blue: 0, alpha: 0.05)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //Fire animations
-        showMenuSideBar()
     }
     
     @IBAction func toCloseMenuSideBar(_ sender: UIButton) {
@@ -168,6 +184,11 @@ class MenuSideBarViewController: UIViewController {
         closeMenuSideBarMoveToStatistic()
     }
     
+    @IBAction func onClickFriendlist(_ sender: UIButton) {
+        moveToFriendlist()
+        closeMenuSideBarMoveToFriendlist()
+    }
+    
     
     func showMenuSideBar() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
@@ -176,22 +197,48 @@ class MenuSideBarViewController: UIViewController {
     }
     
     func closeMenuSideBar() {
-        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
-            self.sideBar.frame.origin.x -= 310
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
+            self.sideBar.frame.origin.x -= self.sideBar.frame.size.width
         }) { completed in
             self.view.removeFromSuperview()
         }
     }
     
     func closeMenuSideBarMoveToStatistic() {
-        UIView.animate(withDuration: 0.25, delay: 0.25, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
-            self.sideBar.frame.origin.x -= 310
+        UIView.animate(withDuration: 0.5, delay: 0.25, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
+            self.sideBar.frame.origin.x -= self.sideBar.frame.size.width
+            
         }) { completed in
+            
+            for view in self.view.subviews {
+                view.removeFromSuperview()
+            }
+            //self.removeFromParent()
+
             let statisticVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbStatisticsID") as! StatisticsViewController
             self.addChild(statisticVC)
             statisticVC.view.frame = self.view.frame
             self.view.addSubview(statisticVC.view)
             statisticVC.didMove(toParent: self)
+        
+        }
+    }
+    
+    func closeMenuSideBarMoveToFriendlist() {
+        UIView.animate(withDuration: 0.5, delay: 0.25, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
+            self.sideBar.frame.origin.x -= self.sideBar.frame.size.width
+            
+        }) { completed in
+            
+            for view in self.view.subviews {
+                view.removeFromSuperview()
+            }
+            
+            let friendlistVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "viewControllerID") as! ViewController
+            self.addChild(friendlistVC)
+            friendlistVC.view.frame = self.view.frame
+            self.view.addSubview(friendlistVC.view)
+            friendlistVC.didMove(toParent: self)
         }
     }
     
@@ -257,6 +304,22 @@ class MenuSideBarViewController: UIViewController {
         self.controlCenterText.textColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
         self.navigationIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
         self.navigationText.textColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+    }
+    
+    func moveToFriendlist() {
+        UIView.animate(withDuration: 0.25) {
+            self.viewMoveMagic.frame.origin.y = self.peopleIcon.frame.origin.y - 13
+            self.peopleIcon.tintColor = .white
+            self.friendListText.textColor = .white
+        }
+        self.messageIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+        self.chatsText.textColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+        self.settingsIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+        self.controlCenterText.textColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+        self.navigationIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+        self.navigationText.textColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+        self.statisticsIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+        self.statisticsText.textColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
     }
 
     /*

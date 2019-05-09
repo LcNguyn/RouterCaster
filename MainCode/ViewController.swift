@@ -142,6 +142,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var listTableView: UITableView!
+    
+    @IBOutlet weak var mainViewSideBar: UIView!
+    @IBOutlet weak var testSideBar: UIView!
+    @IBOutlet weak var peopleIcon: UIImageView!
+    @IBOutlet weak var friendlistText: UILabel!
+    @IBOutlet weak var statisticsIcon: UIImageView!
+    @IBOutlet weak var statisticsText: UILabel!
+    @IBOutlet weak var moveViewMagic: UIView!
+
+    @IBOutlet weak var defaultProfile: UIImageView!
+    @IBOutlet weak var profilebarname: UILabel!
+    
+    
+    
     var friendListArray = [FriendList]()
     var searchString: [FriendList] = []
     var deleteSearchString: [FriendList] = []
@@ -203,6 +217,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
 
+    }
+    
+    func fetchCurrentUser() {
+        
+        Spark.fetchCurrentSparkUser { (message, err, sparkUser) in
+            if let err = err {
+                SparkService.dismissHud(self.hud, text: "Error", detailText: "\(message) \(err.localizedDescription)", delay: 0)
+                return
+            }
+            guard let sparkUser = sparkUser else {
+                SparkService.dismissHud(self.hud, text: "Error", detailText: "Failed to fetch user", delay: 0 )
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.defaultProfile.loadImageUsingCacheWithUrlString(sparkUser.profileImageUrl)
+                
+                self.profilebarname.text = sparkUser.name
+                
+                
+            }
+            
+            SparkService.dismissHud(self.hud, text: "Success", detailText: "Successfully fetched user", delay: 0)
+            
+        }
     }
     // Mark: -
     // Mark: Fetch users profile img
@@ -342,13 +381,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         fetchAllUsers()
+        fetchCurrentUser()
 //        setUpFriendList()
 //        setUpAddFriendList()
         // Do any additional setup after loading the view.
+        
+        
+        self.statisticsIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+        self.view.frame.origin.x += self.view.frame.size.width
+        
+        showFriendlistView()
+        
+        
+        
+        
     }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        testSideBar.frame.origin.x -= testSideBar.frame.size.width
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        testSideBar.frame.origin.x -= testSideBar.frame.size.width
     }
 //    private func setUpFriendList() {
 //        friendListArray.append(FriendList(name: "Thao Nguyen", image: "ThaoImage"))
@@ -377,13 +443,65 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     @IBAction func menuSideBar(_ sender: UIButton) {
-        let menuSideBarVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbSideBarID") as! MenuSideBarViewController
-        self.addChild(menuSideBarVC)
-        menuSideBarVC.view.frame = self.view.frame
-        self.view.addSubview(menuSideBarVC.view)
-        menuSideBarVC.didMove(toParent: self)
+        
+        showTestSideBar()
     }
     
+    @IBAction func onClickMoveToStatistic(_ sender: UIButton) {
+        closeSideBarToMoveToStatistic()
+    }
+    
+    @IBAction func backButton(_ sender: UIButton) {
+        closeTestSideBar()
+    }
+    
+    func showTestSideBar() {
+        mainViewSideBar.isHidden = false
+        testSideBar.isHidden = false
+        
+        UIView.animate(withDuration: 0.5) {
+            self.testSideBar.frame.origin.x += self.testSideBar.frame.size.width
+        }
+    }
+    
+    func closeTestSideBar() {
+        //testSideBar.frame.origin.x = testSideBar.frame.origin.x
+        UIView.animate(withDuration: 0.5, animations: {
+            self.testSideBar.frame.origin.x -= self.testSideBar.frame.size.width
+        }) { completed in
+            self.testSideBar.isHidden = true
+            self.mainViewSideBar.isHidden = true
+        }
+    }
+    
+    func closeSideBarToMoveToStatistic() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.moveViewMagic.frame.origin.y = self.statisticsIcon.frame.origin.y - 13
+            self.peopleIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+            self.friendlistText.textColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
+            self.statisticsIcon.tintColor = UIColor(red: CGFloat(255)/255.0, green: CGFloat(255)/255.0, blue: CGFloat(255)/255.0, alpha: 1)
+            self.statisticsText.textColor = UIColor(red: CGFloat(255)/255.0, green: CGFloat(255)/255.0, blue: CGFloat(255)/255.0, alpha: 1)
+        }) { completed in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.testSideBar.frame.origin.x -= self.testSideBar.frame.size.width
+            }) { completed in
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.testSideBar.isHidden = true
+                    self.mainViewSideBar.isHidden = true
+                }, completion: { completed in
+                    for view in self.view.subviews {
+                        view.removeFromSuperview()
+                    }
+                    let statisticVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbStatisticsID") as! StatisticsViewController
+                    self.addChild(statisticVC)
+                    statisticVC.view.frame = self.view.frame
+                    self.view.addSubview(statisticVC.view)
+                    statisticVC.didMove(toParent: self)
+                })
+            }
+        }
+        
+    }
 
     
     override func viewDidAppear(_ animated: Bool) {
@@ -391,6 +509,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //Fire animations
         
+    }
+    
+    func showFriendlistView() {
+        UIView.animate(withDuration: 0.5) {
+            //            self.view.alpha = 1
+            //            self.mainScrollView.frame.origin.x -= self.mainScrollView.frame.size.width
+            self.view.frame.origin.x -= self.view.frame.size.width
+        }
     }
     
 //    func showMainMenu() {
