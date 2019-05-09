@@ -14,9 +14,18 @@ class SecuritySettingViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // Check account type here
+        
+//        changePasswordBtn.isEnabled = false
+//        let overlayView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.changePasswordView.frame.size))
+//        overlayView.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.2)
+//        overlayView.cornerRadius = 5
+//        changePasswordView.addSubview(overlayView)
+        
     }
     
-
+    @IBOutlet weak var changePasswordView: UIView!
+    @IBOutlet weak var changePasswordBtn: UIButton!
     /*
     // MARK: - Navigation
 

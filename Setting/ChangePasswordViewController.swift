@@ -13,23 +13,51 @@ class ChangePasswordViewController: UIViewController {
     @IBOutlet weak var btnSavePassword: UIButton!
     @IBOutlet weak var currentPasswordLb: UITextField!
     
-    @IBOutlet weak var newPasswordLb: UITextField!
-    @IBOutlet weak var confirmPasswordLb: UITextField!
-    
     @IBAction func didPressSavePassword(_ sender: UIButton) {
         
     }
-    @IBOutlet weak var showCurrentPasswordBtn: UIButton!
     
-    var longGesture: UILongPressGestureRecognizer?
+    @IBAction func didPressSave(_ sender: Any) {
+//        if currentPasswordLb.text == "123456" && newPasswordLb.text != currentPasswordLb.text && newPasswordLb.text == confirmPasswordLb.text && newPasswordLb.text!.count > 0 {
+//
+//            // Do something to change the password
+//
+//            let alert = UIAlertController(title: "Password changed", message: "", preferredStyle: .alert)
+//
+//            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+//                self.dismiss(animated: false, completion: nil)
+//            }))
+//            self.present(alert, animated: true)
+//
+//        } else {
+//            let alert = UIAlertController(title: "Can't set new password", message: "Please re-enter your new password", preferredStyle: .alert)
+//
+//            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+//                alert.dismiss(animated: true, completion: nil)
+//            }))
+//            self.present(alert, animated: true)
+//        }
+        
+        
+        // May be added with some condition from backend
+        let alert = UIAlertController(title: "Email sent", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true)
+    }
+    
+    
+//    var longGesture: UILongPressGestureRecognizer?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ChangePasswordViewController.handleLongPress(_:)))
-        longPressGestureRecognizer.minimumPressDuration = 1
-        showCurrentPasswordBtn.addGestureRecognizer(longPressGestureRecognizer)
+        
+//        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ChangePasswordViewController.handleLongPress(_:)))
+//        longPressGestureRecognizer.minimumPressDuration = 1
+//        showCurrentPasswordBtn.addGestureRecognizer(longPressGestureRecognizer)
         
 //        longGesture = UILongPressGestureRecognizer(target: self, action: #selector(ChangePasswordViewController.longPress(_:)))
 //        longGesture!.minimumPressDuration = 0
