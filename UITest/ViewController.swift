@@ -564,7 +564,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         colorPickerView.shadowRadius = 2
         colorPickerView.shadowOpacity = 1
         colorPickerView.shadowOffset = CGSize(width: 0, height: 2)
-        colorPickerView.colors = [#colorLiteral(red: 0.862745098, green: 0.5568627451, blue: 0.5019607843, alpha: 1),#colorLiteral(red: 0.9098039216, green: 0.6509803922, blue: 0.4941176471, alpha: 1), #colorLiteral(red: 0.8196078431, green: 0.7882352941, blue: 0.5725490196, alpha: 1), #colorLiteral(red: 0.5176470588, green: 0.7960784314, blue: 0.7568627451, alpha: 1), #colorLiteral(red: 0.4549019608, green: 0.6901960784, blue: 0.862745098, alpha: 1), #colorLiteral(red: 1, green: 0.7265317578, blue: 0.7629562013, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1), #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1)]
+        colorPickerView.colors = [#colorLiteral(red: 0.862745098, green: 0.5568627451, blue: 0.5019607843, alpha: 1),#colorLiteral(red: 0.5176470588, green: 0.7960784314, blue: 0.7568627451, alpha: 1),#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),#colorLiteral(red: 1, green: 0.6243959069, blue: 0.4266418815, alpha: 1),#colorLiteral(red: 0.4549019608, green: 0.6901960784, blue: 0.862745098, alpha: 1),#colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1),#colorLiteral(red: 0.8196078431, green: 0.7882352941, blue: 0.5725490196, alpha: 1),#colorLiteral(red: 0.6078431373, green: 0.662745098, blue: 0.968627451, alpha: 1), #colorLiteral(red: 0.7294117647, green: 0.8078431373, blue: 0.5647058824, alpha: 1)]
         
         self.myMapView.addSubview(placeInfo)
         self.myMapView.addSubview(tableView)
@@ -581,7 +581,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 //        menuBtn.setImage(UIImage(named: "arrow-back"), for: UIControl.State.normal)
 //        txtField.text = "Apple Union S"
 //        txtField.becomeFirstResponder()
-//        tableDataSource.sourceTextHasChanged("Apple Union S")
+//        tableDataSource.sourceTextHasChanged("Apple Union Square San")
 //        tableView.isHidden = false
 //    }
 
@@ -646,12 +646,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         myMapView.clear()
         for (i, data) in previewDemoData.enumerated() {
             let marker=GMSMarker()
-            let customMarker = CustomMarkerView(name: data.name, image: data.img, borderColor: UIColor.black, tag: i)
+            let customMarker = CustomMarkerView(name: data.name, image: data.img, borderColor: colorPickerView.colors[data.colorID], tag: i)
             marker.iconView=customMarker
             marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(data.lat), longitude: CLLocationDegrees(data.long))
             marker.map = self.myMapView
             
-            data.polyline.strokeWidth = 3
+            data.polyline.strokeWidth = 4
             data.polyline.strokeColor = colorPickerView.colors[data.colorID]
             data.polyline.map = self.myMapView
             data.start.icon = GMSMarker.markerImage(with: UIColor.green)
@@ -779,7 +779,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 //        colorPickerView.selectColor(at: previewDemoData[colorPickerView.tag].colorID, animated: true)
 //        colorPickerView.isSelectedColorTappable = true
         colorPickerView.layer.backgroundColor = opaqueWhite.cgColor
-        colorPickerView.layer.cornerRadius = 8
+        colorPickerView.layer.cornerRadius = 13
         colorPickerView.center = mapView.projection.point(for: position)
         colorPickerView.center.y -= yPosColorPicker
         self.myMapView.insertSubview(colorPickerView, belowSubview: myTextField)
@@ -808,6 +808,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     
     func colorPickerView(_ colorPickerView: ColorPickerView, didSelectItemAt indexPath: IndexPath) {
         self.previewDemoData[colorPickerView.tag].polyline.strokeColor = colorPickerView.colors[indexPath.item]
+        let tappedMarkerView = tappedMarker?.iconView as! CustomMarkerView
+        tappedMarkerView.imgView.borderColor = colorPickerView.colors[indexPath.item]
         self.previewDemoData[colorPickerView.tag].colorID = indexPath.item
     }
     

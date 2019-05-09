@@ -172,7 +172,6 @@ class ShowFriendRouteLocationViewController: UIViewController, UITableViewDataSo
         
         if let selectedRows = friendTableView.indexPathsForSelectedRows {
             // 1
-            print("Get selected Indices................................")
             delegate?.didSelectFriendsLocation(selectedIndices: selectedRows)
         }
         removeAnimate()

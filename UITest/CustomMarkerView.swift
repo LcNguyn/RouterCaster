@@ -5,6 +5,7 @@ class CustomMarkerView: UIView {
     var name: String!
     var img: UIImage!
     var myBorderColor: UIColor!
+    var imgView: UIImageView = UIImageView()
     
     init(name: String, image: UIImage, borderColor: UIColor, tag: Int) {
         super.init(frame: CGRect.init())
@@ -24,12 +25,15 @@ class CustomMarkerView: UIView {
         name.textColor = .black
         name.sizeToFit()
         
-        let imgView = UIImageView(image: img)
+//        let imgView = UIImageView(image: img)
+        imgView.image = img
         imgView.frame=CGRect(x: 0, y: 20, width: 45, height: 45)
 //        imgView.center = self.center
         imgView.layer.cornerRadius = 23
         imgView.layer.borderColor = myBorderColor.cgColor
-        imgView.layer.borderWidth = 3
+        imgView.layer.borderWidth = 4
+        
+
         imgView.clipsToBounds=true
         
 //        let lbl=UILabel(frame: CGRect(x: name.frame.width / 4, y: 65, width: 50, height: 10))

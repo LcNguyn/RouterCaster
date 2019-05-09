@@ -12,29 +12,29 @@ import GooglePlaces
 import FBSDKLoginKit
 import FBSDKShareKit
 
-class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapViewDelegate, SharingDelegate {
-    func sharer(_ sharer: Sharing, didCompleteWithResults results: [String : Any]) {
-//        var fbURL = URL(string: "fb://")
-//        if let fbURL = fbURL {
-//            if !UIApplication.shared.canOpenURL(fbURL) {
-//                if (results["postId"] != nil) {
-//                    print("Sweet, they shared, and Facebook isn't installed.")
-//                } else {
-//                    print("The post didn't complete, they probably switched back to the app")
-//                }
-//            }
-//        } else {
-//            print("Sweet, they shared, and Facebook is installed.")
-//        }
-        print("The result is: \(results)")
-        
-    }
-    
-    func sharer(_ sharer: Sharing, didFailWithError error: Error) {
-    }
-    
-    func sharerDidCancel(_ sharer: Sharing) {
-    }
+class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapViewDelegate {
+//    func sharer(_ sharer: Sharing, didCompleteWithResults results: [String : Any]) {
+////        var fbURL = URL(string: "fb://")
+////        if let fbURL = fbURL {
+////            if !UIApplication.shared.canOpenURL(fbURL) {
+////                if (results["postId"] != nil) {
+////                    print("Sweet, they shared, and Facebook isn't installed.")
+////                } else {
+////                    print("The post didn't complete, they probably switched back to the app")
+////                }
+////            }
+////        } else {
+////            print("Sweet, they shared, and Facebook is installed.")
+////        }
+//        print("The result is: \(results)")
+//        
+//    }
+//    
+//    func sharer(_ sharer: Sharing, didFailWithError error: Error) {
+//    }
+//    
+//    func sharerDidCancel(_ sharer: Sharing) {
+//    }
     
     
     @IBOutlet weak var routeImage: UIImageView!
@@ -164,7 +164,6 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
         let photo = SharePhoto()
         photo.image = routeImage.image
         photo.isUserGenerated = true
-        photo.caption = "Testing testing"
         
         var dialog = ShareDialog()
         
@@ -174,9 +173,9 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
         //        newContent.contentURL = URL(string: "https://www.google.com")
         newContent.photos = [photo]
         dialog.fromViewController = self
-        dialog.shareContent = content
-        dialog.mode = ShareDialog.Mode.automatic
-        dialog.delegate = self
+        dialog.shareContent = newContent
+        dialog.mode = ShareDialog.Mode.native
+//        dialog.delegate = self
         dialog.show()
     }
     
