@@ -254,6 +254,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             marker.map = nil
             menuBtn.tag = 1
             menuBtn.setImage(UIImage(named: "menu-1"), for: UIControl.State.normal)
+            showFriendMarkers()  // Display again friends in map after searching
             break
         default: break
         }
@@ -309,17 +310,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
             self.present(alert, animated: true, completion: nil)
             break
         case .authorizedWhenInUse, .authorizedAlways:
-            isLocationEnabled = true
             locationManager.startUpdatingLocation()
             locationManager.startMonitoringSignificantLocationChanges()
             break
         }
     }
     
-    var isLocationEnabled = false
+    var firstload = true
     override func viewDidAppear(_ animated: Bool) {
-        if (!isLocationEnabled) {
+        if (firstload) {
             enableBasicLocationServices()
+            firstload = false
         }
     }
     
@@ -413,6 +414,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
 //    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        colorPickerView.removeFromSuperview()
+        tappedMarker = nil
+        myMapView.clear()
         menuBtn.tag = 2
         menuBtn.setImage(UIImage(named: "arrow-back"), for: UIControl.State.normal)
         print("Yes")
@@ -492,6 +496,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     
     
     @IBAction func didPressMyLocation(_ sender: Any) {
+        enableBasicLocationServices()
         let location: CLLocation? = myMapView.myLocation
         if location != nil {
             myMapView.animate(toLocation: (location?.coordinate)!)
@@ -792,9 +797,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
     }
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        colorPickerView.selectColor(at: previewDemoData[colorPickerView.tag].colorID, animated: true)
-        colorPickerView.removeFromSuperview()
-        tappedMarker = nil
+        if (tappedMarker != nil) {
+            colorPickerView.selectColor(at: previewDemoData[colorPickerView.tag].colorID, animated: true)
+            colorPickerView.removeFromSuperview()
+            tappedMarker = nil
+        } else if (txtField.isEditing) {
+            didPressMenuBtn(menuBtn)
+        }
     }
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {

@@ -53,6 +53,7 @@ class TrackRouteViewController: UIViewController, CLLocationManagerDelegate, GMS
         destionationLb.text = endMarker.title
         myMapView.delegate = self
         myMapView.camera = self.camera
+        
         myMapView.isMyLocationEnabled = true
         myMapView.addSubview(cancelRouteBtn)
         myMapView.addSubview(myLocation)
@@ -60,8 +61,41 @@ class TrackRouteViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        enableBasicLocationServices()
     }
+    
+    func enableBasicLocationServices() {
+        locationManager.delegate = self
+        
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.requestWhenInUseAuthorization()
+            break
+            
+        case .restricted, .denied:
+            // Disable location features
+            print("Disabled Authorization........................")
+            let alert = UIAlertController(title: "Need Authorization", message: "This app is unusable if you don't authorize this app to use your location!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { _ in
+                let url = URL(string: UIApplication.openSettingsURLString)!
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+            break
+        case .authorizedWhenInUse, .authorizedAlways:
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        enableBasicLocationServices()
+    }
+    
     @IBAction func didCancelRoute(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "Do you want to quit this route", message: "", preferredStyle: .alert)
@@ -93,7 +127,18 @@ class TrackRouteViewController: UIViewController, CLLocationManagerDelegate, GMS
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if (firstLoad) {
-            drawPath(startLocation: manager.location!, endLocation: CLLocation(latitude: endMarker.position.latitude, longitude: endMarker.position.longitude))
+            drawPath(startLocation: manager.location!, endLocation: CLLocation(latitude: endMarker.position.latitude, longitude: endMarker.position.longitude)) {
+                (result) in
+                if (!result) {
+                    let alert = UIAlertController(title: "No available route", message: "Please re-define your route", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                        self.locationManager.delegate = nil
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true)
+                }
+            }
             startMarker.position = manager.location!.coordinate
             startDate = NSDate()
             firstLoad = false
@@ -113,7 +158,18 @@ class TrackRouteViewController: UIViewController, CLLocationManagerDelegate, GMS
                 alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action) in
                     alert.dismiss(animated: true, completion: nil)
                     
-                    self.drawPath(startLocation: manager.location!, endLocation: CLLocation(latitude: self.endMarker.position.latitude, longitude: self.endMarker.position.longitude))
+                    self.drawPath(startLocation: manager.location!, endLocation: CLLocation(latitude: self.endMarker.position.latitude, longitude: self.endMarker.position.longitude)) {
+                        (result) in
+                        if (!result) {
+                            let alert = UIAlertController(title: "No available route", message: "Please re-define your route", preferredStyle: .alert)
+                            
+                            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                                self.locationManager.delegate = nil
+                                self.dismiss(animated: true, completion: nil)
+                            }))
+                            self.present(alert, animated: true)
+                        }
+                    }
                     
 //
 //                    self.myPolyline.path = self.myPath
@@ -171,17 +227,19 @@ class TrackRouteViewController: UIViewController, CLLocationManagerDelegate, GMS
     }
     
     @IBAction func didTapMyLocation(_ sender: UIButton) {
-        let lat = (locationManager.location!.coordinate.latitude)
-        let long = (locationManager.location!.coordinate.longitude)
-        let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: self.myMapView.camera.zoom)
-        self.myMapView.animate(to: camera)
-        isTracking = true
-        myLocation.isHidden = true
-        
+        enableBasicLocationServices()
+        if let location = locationManager.location {
+            let lat = location.coordinate.latitude
+            let long = location.coordinate.longitude
+            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: self.myMapView.camera.zoom)
+            self.myMapView.animate(to: camera)
+            isTracking = true
+            myLocation.isHidden = true
+        }
     }
     
     
-    func drawPath(startLocation: CLLocation, endLocation: CLLocation)
+    func drawPath(startLocation: CLLocation, endLocation: CLLocation, completion:@escaping (Bool) -> ())
     {
         let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
         let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
@@ -202,32 +260,33 @@ class TrackRouteViewController: UIViewController, CLLocationManagerDelegate, GMS
                 
                 // print route using Polyline
                 
-                //  should be: if routes.count == 0 then 1. hide start and share btn, and have a popup
-                for route in routes
-                {
+                
 //                    print(route)
-                    let routeOverviewPolyline = route["overview_polyline"].dictionary
+                if (routes.count == 0) {
+                    completion(false)
+                } else {
+                    let routeOverviewPolyline = routes[0]["overview_polyline"].dictionary
                     let points = routeOverviewPolyline?["points"]?.stringValue
                     let path = GMSPath.init(fromEncodedPath: points!)
                     //                let polyline = GMSPolyline.init(path: path)
                     
-//                    var entirePath = GMSMutablePath()
-//                    for i in 0..<self.myPath.count() {
-//                        entirePath.add(self.myPath.coordinate(at: i))
-//                    }
-//                    for i in 0..<path!.count() {
-//                        entirePath.add(path!.coordinate(at: i))
-//                    }
+    //                    var entirePath = GMSMutablePath()
+    //                    for i in 0..<self.myPath.count() {
+    //                        entirePath.add(self.myPath.coordinate(at: i))
+    //                    }
+    //                    for i in 0..<path!.count() {
+    //                        entirePath.add(path!.coordinate(at: i))
+    //                    }
 
                     
                     self.polyline.path = path
                     self.polyline.strokeWidth = 4
-                    self.polyline.strokeColor = UIColor.red
+                    self.polyline.strokeColor = UIColor(red:0.25, green:0.43, blue:0.57, alpha:1.0)
                     self.polyline.map = self.myMapView
                     
-                    
-//                    let bounds = GMSCoordinateBounds(path: path!)
-//                    self.myMapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50.0))
+                    let bounds = GMSCoordinateBounds(path: path!)
+                    self.myMapView.moveCamera(GMSCameraUpdate.fit(bounds))
+                    completion(true)
                 }
             } catch {}
         }

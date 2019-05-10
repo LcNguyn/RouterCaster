@@ -92,6 +92,7 @@ class DirectionViewController: UIViewController, GMSMapViewDelegate, CLLocationM
         if (requiredLocation) {
             enableBasicLocationServices()
         }
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -135,6 +136,20 @@ class DirectionViewController: UIViewController, GMSMapViewDelegate, CLLocationM
         
         endMarker.map = self.myMapView
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        let overlayView = UIView(frame: CGRect(x: 0, y: 0, width: self.myMapView.frame.width, height: self.myMapView.frame.height))
+//        overlayView.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.7)
+//        self.myMapView.addSubview(overlayView)
+//
+//        self.myMapView.addSubview(directionInfo)
+////        menuBtn.tag = 2
+////        menuBtn.setImage(UIImage(named: "arrow-back"), for: UIControl.State.normal)
+////        txtField.text = "Apple Union S"
+////        txtField.becomeFirstResponder()
+////        tableDataSource.sourceTextHasChanged("Apple Union Square San")
+////        tableView.isHidden = false
+//    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         performSegue(withIdentifier: "changePlace", sender: textField)
@@ -237,12 +252,13 @@ class DirectionViewController: UIViewController, GMSMapViewDelegate, CLLocationM
                     let routeOverviewPolyline = routes[0]["overview_polyline"].dictionary
                     let points = routeOverviewPolyline?["points"]?.stringValue
                     // Test
-//                    print(points)
                     let path = GMSPath.init(fromEncodedPath: points!)
+                    print("Encoded:")
+                    print(path?.encodedPath())
                     //                let polyline = GMSPolyline.init(path: path)
                     self.polyline.path = path
                     self.polyline.strokeWidth = 4
-                    self.polyline.strokeColor = UIColor.red
+                    self.polyline.strokeColor = UIColor(red:0.25, green:0.43, blue:0.57, alpha:1.0)
                     self.polyline.map = self.myMapView
                                         
 //                    let bounds = GMSCoordinateBounds(path: path!)
@@ -254,7 +270,7 @@ class DirectionViewController: UIViewController, GMSMapViewDelegate, CLLocationM
                         bounds = bounds.includingCoordinate(path!.coordinate(at: index))
                     }
 //                    self.myMapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 150.0))
-                    self.myMapView.moveCamera(GMSCameraUpdate.fit(bounds, withPadding: 150.0))
+                    self.myMapView.moveCamera(GMSCameraUpdate.fit(bounds, withPadding: 140.0))
                     
 //                    let bounds = GMSCoordinateBounds(coordinate: startLocation.coordinate, coordinate: endLocation.coordinate)
 //                    let camera = self.myMapView.camera(for: bounds, insets: UIEdgeInsets())!

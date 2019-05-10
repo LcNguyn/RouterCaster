@@ -12,29 +12,29 @@ import GooglePlaces
 import FBSDKLoginKit
 import FBSDKShareKit
 
-class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapViewDelegate {
-//    func sharer(_ sharer: Sharing, didCompleteWithResults results: [String : Any]) {
-////        var fbURL = URL(string: "fb://")
-////        if let fbURL = fbURL {
-////            if !UIApplication.shared.canOpenURL(fbURL) {
-////                if (results["postId"] != nil) {
-////                    print("Sweet, they shared, and Facebook isn't installed.")
-////                } else {
-////                    print("The post didn't complete, they probably switched back to the app")
-////                }
-////            }
-////        } else {
-////            print("Sweet, they shared, and Facebook is installed.")
-////        }
-//        print("The result is: \(results)")
-//        
-//    }
-//    
-//    func sharer(_ sharer: Sharing, didFailWithError error: Error) {
-//    }
-//    
-//    func sharerDidCancel(_ sharer: Sharing) {
-//    }
+class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapViewDelegate, SharingDelegate {
+    func sharer(_ sharer: Sharing, didCompleteWithResults results: [String : Any]) {
+//        var fbURL = URL(string: "fb://")
+//        if let fbURL = fbURL {
+//            if !UIApplication.shared.canOpenURL(fbURL) {
+//                if (results["postId"] != nil) {
+//                    print("Sweet, they shared, and Facebook isn't installed.")
+//                } else {
+//                    print("The post didn't complete, they probably switched back to the app")
+//                }
+//            }
+//        } else {
+//            print("Sweet, they shared, and Facebook is installed.")
+//        }
+        print("The result is: \(results)")
+        
+    }
+    
+    func sharer(_ sharer: Sharing, didFailWithError error: Error) {
+    }
+    
+    func sharerDidCancel(_ sharer: Sharing) {
+    }
     
     
     @IBOutlet weak var routeImage: UIImageView!
@@ -61,9 +61,9 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
 //        timeTravelledLb.text = "00:00:36"
 //
 //        // OK version
-//        var staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=\(Int(routeImage.bounds.width))x\(Int(routeImage.bounds.height))&path=weight:3|color:red|enc:s`seFdnbjVZEAQAa@De@DQX_@vBqClA{AFKTNnAbBbDnExAtBqD~EiBbCe@l@IDKBMCoBR}@Ha@Lm@RgBPWwDk@cJ[{E&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
+//        var staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=\(Int(routeImage.bounds.width))x\(Int(routeImage.bounds.height))&markers=color:green|label:S|\(Double((startMarker?.position.latitude)!)),\(Double((startMarker?.position.longitude)!))&markers=color:red|label:E|\(Double((endMarker?.position.latitude)!)),\(Double((endMarker?.position.longitude)!))&path=weight:4|color:0x3f6e91|enc:s`seFdnbjVZEAQAa@De@DQX_@vBqClA{AFKTNnAbBbDnExAtBrCxDlEbG_DfEoAnBOj@WTgBPq@JkEh@yDd@uKpAyC\\WsDs@qKG_Ba@eG&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
         
-        let staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=\(Int(routeImage.bounds.width))x\(Int(routeImage.bounds.height))&markers=color:green|label:S|\(Double((startMarker?.position.latitude)!)),\(Double((startMarker?.position.longitude)!))&markers=color:red|label:E|\(Double((endMarker?.position.latitude)!)),\(Double((endMarker?.position.longitude)!))&path=weight:3|color:red|enc:\(self.myPath!.encodedPath())&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
+        let staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=\(Int(routeImage.bounds.width))x\(Int(routeImage.bounds.height))&markers=color:green|label:S|\(Double((startMarker?.position.latitude)!)),\(Double((startMarker?.position.longitude)!))&markers=color:0x3f6e91|label:E|\(Double((endMarker?.position.latitude)!)),\(Double((endMarker?.position.longitude)!))&path=weight:4|color:red|enc:\(self.myPath!.encodedPath())&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
         
         //        print(self.myPolyline.path?.encodedPath())
         //        print(routeImage.frame.width)
@@ -89,7 +89,6 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
             }
             task.resume()
         }
-        timeTravelledLb.text = "00:12:33"
     }
     
     override func viewDidLoad() {
@@ -106,8 +105,9 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
         routeDistanceLb.text?.append(" mi")
         timeTravelledLb.text = timeTravelled!.stringFromTimeInterval()
         
-//        routeDistanceLb.text = "350"
-//        timeTravelledLb.text = "00:00:36"
+        // For on-barding
+//        routeDistanceLb.text = "1.3 mi"
+//        timeTravelledLb.text = "00:12:33"
 
 //        // OK version
 //        var staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=358x381&path=weight:3|color:red|enc:s`seFdnbjVZEAQAa@De@DQX_@vBqClA{AFKTNnAbBbDnExAtBqD~EiBbCe@l@IDKBMCoBR}@Ha@Lm@RgBPWwDk@cJ[{E&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
@@ -174,7 +174,8 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
         newContent.photos = [photo]
         dialog.fromViewController = self
         dialog.shareContent = newContent
-        dialog.mode = ShareDialog.Mode.native
+        print("Press Facebookkkkk")
+        dialog.mode = ShareDialog.Mode.feedWeb
 //        dialog.delegate = self
         dialog.show()
     }
