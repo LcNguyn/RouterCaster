@@ -17,6 +17,7 @@
 		574760552281B25400B46FD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 574760532281B25400B46FD8 /* LaunchScreen.storyboard */; };
 		574760602281B25400B46FD8 /* SettingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5747605F2281B25400B46FD8 /* SettingTests.swift */; };
 		5747606B2281B25400B46FD8 /* SettingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5747606A2281B25400B46FD8 /* SettingUITests.swift */; };
+		575496C92286B45B007640F6 /* TermsOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575496C82286B45B007640F6 /* TermsOfServiceViewController.swift */; };
 		57BE612522843574009629D1 /* LocationSharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BE612422843574009629D1 /* LocationSharingViewController.swift */; };
 		57F3681A22847043000BF609 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F3681922847042000BF609 /* CustomCell.swift */; };
 		57F3681C2284901E000BF609 /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F3681B2284901E000BF609 /* PersonalInfoViewController.swift */; };
@@ -58,6 +59,7 @@
 		574760662281B25400B46FD8 /* SettingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SettingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5747606A2281B25400B46FD8 /* SettingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUITests.swift; sourceTree = "<group>"; };
 		5747606C2281B25400B46FD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		575496C82286B45B007640F6 /* TermsOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceViewController.swift; sourceTree = "<group>"; };
 		57BE612422843574009629D1 /* LocationSharingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingViewController.swift; sourceTree = "<group>"; };
 		57F3681922847042000BF609 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		57F3681B2284901E000BF609 /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				57F3681B2284901E000BF609 /* PersonalInfoViewController.swift */,
 				570C137A228341BE00BFF10F /* ChangePasswordViewController.swift */,
 				57BE612422843574009629D1 /* LocationSharingViewController.swift */,
+				575496C82286B45B007640F6 /* TermsOfServiceViewController.swift */,
 				570C137622833FCC00BFF10F /* SecuritySettingViewController.swift */,
 				574760512281B25400B46FD8 /* Assets.xcassets */,
 				574760532281B25400B46FD8 /* LaunchScreen.storyboard */,
@@ -354,6 +357,7 @@
 				57F3681C2284901E000BF609 /* PersonalInfoViewController.swift in Sources */,
 				570C137B228341BE00BFF10F /* ChangePasswordViewController.swift in Sources */,
 				57F3681A22847043000BF609 /* CustomCell.swift in Sources */,
+				575496C92286B45B007640F6 /* TermsOfServiceViewController.swift in Sources */,
 				570C137722833FCC00BFF10F /* SecuritySettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

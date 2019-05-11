@@ -1,26 +1,18 @@
 //
-//  PersonalInfoViewController.swift
+//  TermsOfServiceViewController.swift
 //  Setting
 //
-//  Created by tang quang an on 5/9/19.
+//  Created by tang quang an on 5/11/19.
 //  Copyright © 2019 Setting. All rights reserved.
 //
 
 import UIKit
 
-class PersonalInfoViewController: UIViewController {
+class TermsOfServiceViewController: UIViewController {
 
-    @IBOutlet weak var emailTxtField: UITextField!
-    @IBOutlet weak var firstNameTxtField: UITextField!
-    @IBOutlet weak var middleNameTxtField: UITextField!
-    @IBOutlet weak var lastNameTxtField: UITextField!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Check account type and disable the email textfield if ...
-        emailTxtField.isEnabled = false
-        
         // Do any additional setup after loading the view.
     }
     
@@ -33,13 +25,9 @@ class PersonalInfoViewController: UIViewController {
         view.window!.layer.add(transition, forKey: kCATransition)
         self.dismiss(animated: false) {
         }
+        
     }
     
-    @IBAction func didPressSaveInfo(_ sender: Any) {
-        // Fetch data and check
-        
-        //if ()
-    }
     /*
     // MARK: - Navigation
 

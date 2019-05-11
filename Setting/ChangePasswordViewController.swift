@@ -17,6 +17,18 @@ class ChangePasswordViewController: UIViewController {
         
     }
     
+    @IBAction func didPressBack(_ sender: UIButton) {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        self.dismiss(animated: false) {
+        }
+    }
+    
+    
     @IBAction func didPressSave(_ sender: Any) {
 //        if currentPasswordLb.text == "123456" && newPasswordLb.text != currentPasswordLb.text && newPasswordLb.text == confirmPasswordLb.text && newPasswordLb.text!.count > 0 {
 //
