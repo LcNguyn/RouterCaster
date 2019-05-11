@@ -6,7 +6,18 @@ target 'MainCode' do
   use_frameworks!
 
   # Pods for MainCode
+pod 'GooglePlaces'
+pod 'GooglePlacePicker'
+pod 'GoogleMaps'
+pod 'GooglePlacesAPI'
+pod 'SwiftyJSON'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
+pod 'FBSDKPlacesKit'
+pod 'IGColorPicker'
 pod 'Firebase/Core'
+pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'Firebase/Firestore'
@@ -18,4 +29,6 @@ pod 'TinyConstraints'
 pod 'GoogleSignIn'
 pod 'Charts'
 pod 'Dwifft'
+pod 'TextFieldEffects'
+
 end

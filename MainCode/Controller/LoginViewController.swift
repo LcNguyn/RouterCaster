@@ -177,7 +177,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
                 view.removeFromSuperview()
             }
             
-            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "viewControllerID") as! ViewController
+            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFriendlistID") as! FriendlistViewController
             self.addChild(mainViewVC)
             mainViewVC.view.frame = self.view.frame
             self.view.addSubview(mainViewVC.view)
@@ -200,6 +200,17 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
         //        setupusername()
         configureViewComponents()
         // Do any additional setup after loading the view.
+        
+        self.view.alpha = 0
+        self.view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        showLoginVC()
+    }
+    
+    func showLoginVC() {
+        UIView.animate(withDuration: 0.2) {
+            self.view.alpha = 1
+            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
     }
     
   
@@ -225,7 +236,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
     }
     
     @objc func handleShowSignUp() {
-        let signUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbSignUpID") as! SignUpViewController
+        let signUpVC = UIStoryboard(name: "Khoi", bundle: nil).instantiateViewController(withIdentifier: "sbSignUpID") as! SignUpViewController
         self.addChild(signUpVC)
         signUpVC.view.frame = self.view.frame
         self.view.addSubview(signUpVC.view)
@@ -242,7 +253,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
                 return
             }
            
-            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "viewControllerID") as! ViewController
+            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFriendlistID") as! FriendlistViewController
             self.addChild(mainViewVC)
             mainViewVC.view.frame = self.view.frame
             self.view.addSubview(mainViewVC.view)
@@ -359,7 +370,7 @@ extension LoginViewController: GIDSignInDelegate {
             
 //
             
-            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "viewControllerID") as! ViewController
+            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFriendlistID") as! FriendlistViewController
             self.addChild(mainViewVC)
             mainViewVC.view.frame = self.view.frame
             self.view.addSubview(mainViewVC.view)

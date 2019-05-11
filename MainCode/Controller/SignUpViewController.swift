@@ -156,7 +156,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate {
             SparkService.dismissHud(self.hud, text: "Success", detailText: "Successfully signed in with Facebook", delay: 1)
             let when = DispatchTime.now() + 3
             
-            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "viewControllerID") as! ViewController
+            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFriendlistID") as! FriendlistViewController
             self.addChild(mainViewVC)
             mainViewVC.view.frame = self.view.frame
             self.view.addSubview(mainViewVC.view)

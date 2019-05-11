@@ -94,7 +94,7 @@ class Menu2ViewController: UIViewController {
             }
             
             
-            let friendlistVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "viewControllerID") as! ViewController
+            let friendlistVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFriendlistID") as! FriendlistViewController
             self.addChild(friendlistVC)
             friendlistVC.view.frame = self.view.frame
             self.view.addSubview(friendlistVC.view)

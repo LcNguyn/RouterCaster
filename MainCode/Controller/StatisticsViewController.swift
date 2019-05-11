@@ -50,6 +50,7 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var statisticsIcon: UIImageView!
     @IBOutlet weak var statisticsText: UILabel!
     @IBOutlet weak var viewMoveMagic: UIView!
+    @IBOutlet weak var arrowImage: UIImageView!
     
     
     var yNumbersOfAverageDistance: [Double] = [300,300,700,0,500,500,100,100,300,100,300]
@@ -64,18 +65,27 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
     var line1ChartEntryMonthly = [ChartDataEntry]()
     var line2ChartEntryMonthly = [ChartDataEntry]()
     
+    var backInfo = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCurrentUser()
-
+        arrowImage.tintColor = UIColor(red: CGFloat(255)/255.0, green: CGFloat(255)/255.0, blue: CGFloat(255)/255.0, alpha: 1)
 //        self.mainScrollView.frame.origin.x += self.mainScrollView.frame.size.width
         //self.view.removeFromSuperview()
+        if backInfo == "back" {
+            self.view.frame.origin.x -= self.view.frame.size.width
+            showStatisticsViewFromLeftToRight()
+        } else {
+            self.view.frame.origin.x += self.view.frame.size.width
+            showStatisticsView()
+        }
         
-        self.view.frame.origin.x += self.view.frame.size.width
+        
+        
         statisticsIcon.tintColor = UIColor(red: CGFloat(255)/255.0, green: CGFloat(255)/255.0, blue: CGFloat(255)/255.0, alpha: 1)
         peopleIcon.tintColor = UIColor(red: CGFloat(79)/255.0, green: CGFloat(138)/255.0, blue: CGFloat(182)/255.0, alpha: 1)
         
-        showStatisticsView()
         testSideBar.frame.origin.x -= testSideBar.frame.size.width
         
         realChart.chartDescription?.text = ""
@@ -162,6 +172,17 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
         closeSideBarToMoveToFriendlist()
     }
     
+    @IBAction func onClickMoveToCompareList(_ sender: UIButton) {
+        for view in self.view.subviews {
+            view.removeFromSuperview()
+        }
+        let comparelistVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbCompareListID") as! CompareListViewController
+        self.addChild(comparelistVC)
+        comparelistVC.view.frame = self.view.frame
+        self.view.addSubview(comparelistVC.view)
+        comparelistVC.didMove(toParent: self)
+    }
+    
     func closeSideBarToMoveToFriendlist() {
         UIView.animate(withDuration: 0.2, animations: {
             self.viewMoveMagic.frame.origin.y = self.peopleIcon.frame.origin.y - 13
@@ -180,7 +201,7 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
                     for view in self.view.subviews {
                         view.removeFromSuperview()
                     }
-                    let friendlistVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "viewControllerID") as! ViewController
+                    let friendlistVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFriendlistID") as! FriendlistViewController
                     self.addChild(friendlistVC)
                     friendlistVC.view.frame = self.view.frame
                     self.view.addSubview(friendlistVC.view)
@@ -306,11 +327,16 @@ class StatisticsViewController: UIViewController, UIScrollViewDelegate {
     
     func showStatisticsView() {
         UIView.animate(withDuration: 0.5) {
-//            self.view.alpha = 1
-//            self.mainScrollView.frame.origin.x -= self.mainScrollView.frame.size.width
             self.view.frame.origin.x -= self.view.frame.size.width
         }
     }
+    
+    func showStatisticsViewFromLeftToRight() {
+        UIView.animate(withDuration: 0.5) {
+            self.view.frame.origin.x += self.view.frame.size.width
+        }
+    }
+    
     
     func showCompareView() {
         self.compareView.frame.origin.x += self.view.frame.size.width
