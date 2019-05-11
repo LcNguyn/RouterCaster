@@ -241,11 +241,6 @@ class DirectionViewController: UIViewController, GMSMapViewDelegate, CLLocationM
                 let routes = json["routes"].arrayValue
                 
                 // print route using Polyline
-                
-                //  should be: if routes.count == 0 then 1. hide start and share btn, clear distance and   and have a popup
-//                for route in routes
-//                {
-//                    print(route)
                 if (routes.count == 0) {
                     completion(false)
                 } else {

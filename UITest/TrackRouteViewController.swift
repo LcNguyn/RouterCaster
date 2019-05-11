@@ -176,7 +176,6 @@ class TrackRouteViewController: UIViewController, CLLocationManagerDelegate, GMS
 //                    self.myPolyline.map = self.myMapView
 //                    self.myPolyline.strokeWidth = 4
 //                    self.myPolyline.strokeColor = UIColor.red
-                    
                 }))
                 
                 self.present(alert, animated: true)
@@ -199,9 +198,7 @@ class TrackRouteViewController: UIViewController, CLLocationManagerDelegate, GMS
                 popOverVC.endMarker?.map = nil
                 popOverVC.timeTravelled = self.timeTravelled
                 //            popOverVC.myPath = self.myPath
-                
-                // Testing
-                popOverVC.myPath = path
+                popOverVC.myPath = path  // Testing  // Can remove
                 popOverVC.myPolyline = self.polyline
                 
                 self.addChild(popOverVC)

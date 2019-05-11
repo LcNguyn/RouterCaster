@@ -18,10 +18,17 @@ class FriendLocationCell: UITableViewCell {
         // Initialization code
     }
 
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {}
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        super.setSelected(selected, animated: false)
+        let viewForHighlight = UIView()
+        self.selectedBackgroundView = viewForHighlight
+        if self.isEditing {
+            viewForHighlight.backgroundColor = UIColor.clear
+        } else {
+            viewForHighlight.backgroundColor = UIColor.gray
+        }
     }
 
 }
