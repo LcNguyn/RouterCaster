@@ -1829,7 +1829,7 @@
                                         </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wna-y7-DIg">
-                                        <rect key="frame" x="82" y="309" width="85" height="38"/>
+                                        <rect key="frame" x="75" y="309" width="99" height="38"/>
                                         <state key="normal" image="Done-1"/>
                                         <connections>
                                             <action selector="hideTabBar:" destination="XXf-h5-kw2" eventType="touchUpInside" id="wc4-98-DPB"/>
@@ -1838,13 +1838,12 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="4uO-IN-MQ8" secondAttribute="trailing" id="17w-cI-CkR"/>
-                                    <constraint firstItem="Wna-y7-DIg" firstAttribute="leading" secondItem="ATk-aY-nsf" secondAttribute="leading" constant="82" id="2s0-je-teK"/>
                                     <constraint firstAttribute="width" constant="276" id="Eib-zY-06m"/>
                                     <constraint firstAttribute="bottom" secondItem="4uO-IN-MQ8" secondAttribute="bottom" id="Uf4-ir-eJr"/>
                                     <constraint firstItem="4uO-IN-MQ8" firstAttribute="top" secondItem="ATk-aY-nsf" secondAttribute="top" id="jxi-q8-26N"/>
                                     <constraint firstItem="4uO-IN-MQ8" firstAttribute="leading" secondItem="ATk-aY-nsf" secondAttribute="leading" id="nON-bt-u8G"/>
                                     <constraint firstAttribute="height" constant="355" id="ps2-Rm-ClO"/>
-                                    <constraint firstAttribute="trailing" secondItem="Wna-y7-DIg" secondAttribute="trailing" constant="109" id="wni-QS-eHU"/>
+                                    <constraint firstItem="Wna-y7-DIg" firstAttribute="centerX" secondItem="ATk-aY-nsf" secondAttribute="centerX" constant="-13.5" id="xt2-tl-giD"/>
                                     <constraint firstAttribute="bottom" secondItem="Wna-y7-DIg" secondAttribute="bottom" constant="8" id="zj2-YE-blr"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>

@@ -91,6 +91,7 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
         }
     }
     
+    var isMetric = true
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -101,8 +102,8 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
 //        routeImage.clipsToBounds = true
         
         // Display data
-        routeDistanceLb.text = String((Double((GMSGeometryLength(myPath!)) / 1000) / 1.609).roundToDecimal(2))
-        routeDistanceLb.text?.append(" mi")
+        routeDistanceLb.text = String((Double((GMSGeometryLength(myPath!)) / 1000) / (isMetric ? 1 : 1.609)).roundToDecimal(2))
+        routeDistanceLb.text?.append(" \(isMetric ? "km" : "mi")")
         timeTravelledLb.text = timeTravelled!.stringFromTimeInterval()
         
         // For on-barding
@@ -174,7 +175,6 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
         newContent.photos = [photo]
         dialog.fromViewController = self
         dialog.shareContent = newContent
-        print("Press Facebookkkkk")
         dialog.mode = ShareDialog.Mode.feedWeb
 //        dialog.delegate = self
         dialog.show()

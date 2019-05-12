@@ -220,13 +220,14 @@ class DirectionViewController: UIViewController, GMSMapViewDelegate, CLLocationM
         
     }
     
+    var isMetric = true
     func drawPath(startLocation: CLLocation, endLocation: CLLocation, completion:@escaping (Bool) -> ())
     {
         let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
         let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
         
         
-        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
+        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&units=\(isMetric ? "metric" : "imperial")&mode=driving&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
         
         
         Alamofire.request(url).responseJSON { (response) in

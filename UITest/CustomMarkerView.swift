@@ -1,6 +1,11 @@
 import Foundation
 import UIKit
 
+enum MarkerDisplay {
+    case Name, ProfilePicture, Both
+}
+var markerDisplay = MarkerDisplay.Name
+
 class CustomMarkerView: UIView {
     var name: String!
     var img: UIImage!
@@ -19,15 +24,22 @@ class CustomMarkerView: UIView {
     func setupViews() {
         
         let name = UILabel()
-        name.text = self.name
-        name.textAlignment = .center
         name.font = .init(UIFont(name: "Avenir-Medium", size: 16)!)
-        name.textColor = .black
+        if (markerDisplay == .Both || markerDisplay == .Name) {
+            name.text = self.name
+            name.textAlignment = .center
+            name.textColor = .black
+        }
         name.sizeToFit()
         
 //        let imgView = UIImageView(image: img)
-        imgView.image = img
-        imgView.frame=CGRect(x: 0, y: 20, width: 45, height: 45)
+        
+        if (markerDisplay == .Both || markerDisplay == .ProfilePicture) {
+            imgView.image = img
+        } else {
+            imgView.backgroundColor = .white
+        }
+        imgView.frame=CGRect(x: 0, y: name.frame.height, width: 45, height: 45)
 //        imgView.center = self.center
         imgView.layer.cornerRadius = 23
         imgView.layer.borderColor = myBorderColor.cgColor
@@ -48,10 +60,11 @@ class CustomMarkerView: UIView {
 //        self.frame = .init(x: 0, y: 0, width: name.frame.width, height: 100)
 //        self.sizeToFit()
         
+        let markerHeight = name.frame.height + imgView.frame.height
         if (name.frame.width > imgView.frame.width) {
-            self.frame = .init(x: 0, y: 0, width: name.frame.width, height: 65)
+            self.frame = .init(x: 0, y: 0, width: name.frame.width, height: markerHeight)
         } else {
-            self.frame = .init(x: 0, y: 0, width: imgView.frame.width, height: 65)
+            self.frame = .init(x: 0, y: 0, width: imgView.frame.width, height: markerHeight)
         }
         name.center.x = self.center.x
         imgView.center.x = self.center.x
