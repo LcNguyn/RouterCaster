@@ -169,6 +169,7 @@ class MenuSideBarViewController: UIViewController {
     
     @IBAction func onClickChats(_ sender: UIButton) {
         moveToChats()
+        closeMenuSideBarMoveToChat()
     }
     
     @IBAction func onClickNavigation(_ sender: UIButton) {
@@ -239,6 +240,24 @@ class MenuSideBarViewController: UIViewController {
             friendlistVC.view.frame = self.view.frame
             self.view.addSubview(friendlistVC.view)
             friendlistVC.didMove(toParent: self)
+        }
+    }
+    
+    func closeMenuSideBarMoveToChat() {
+        UIView.animate(withDuration: 0.5, delay: 0.25, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [], animations: {
+            self.sideBar.frame.origin.x -= self.sideBar.frame.size.width
+            
+        }) { completed in
+            
+            for view in self.view.subviews {
+                view.removeFromSuperview()
+            }
+            
+            let messageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbNavigationID") as! UINavigationController
+            self.addChild(messageVC)
+            messageVC.view.frame = self.view.frame
+            self.view.addSubview(messageVC.view)
+            messageVC.didMove(toParent: self)
         }
     }
     

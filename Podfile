@@ -30,5 +30,6 @@ pod 'GoogleSignIn'
 pod 'Charts'
 pod 'Dwifft'
 pod 'TextFieldEffects'
+pod ‘M13Checkbox’
 
 end

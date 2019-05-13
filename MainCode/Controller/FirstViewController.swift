@@ -76,11 +76,11 @@ class FirstViewController: UIViewController {
             for view in self.view.subviews {
                 view.removeFromSuperview()
             }
-            let secondVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbSecondViewID") as! SecondViewController
-            self.addChild(secondVC)
-            secondVC.view.frame = self.view.frame
-            self.view.addSubview(secondVC.view)
-            secondVC.didMove(toParent: self)
+            let getstartedVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbGetStartedID") as! SwipingController
+            self.addChild(getstartedVC)
+            getstartedVC.view.frame = self.view.frame
+            self.view.addSubview(getstartedVC.view)
+            getstartedVC.didMove(toParent: self)
 
         }
     }

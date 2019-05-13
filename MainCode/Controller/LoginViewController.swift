@@ -177,11 +177,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
                 view.removeFromSuperview()
             }
             
-            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFriendlistID") as! FriendlistViewController
-            self.addChild(mainViewVC)
-            mainViewVC.view.frame = self.view.frame
-            self.view.addSubview(mainViewVC.view)
-            mainViewVC.didMove(toParent: self)
+            let secondVC = UIStoryboard(name: "OnBoarding", bundle: nil).instantiateViewController(withIdentifier: "sbSecondViewID") as! SecondViewController
+            self.addChild(secondVC)
+            secondVC.view.frame = self.view.frame
+            self.view.addSubview(secondVC.view)
+            secondVC.didMove(toParent: self)
             
             DispatchQueue.main.asyncAfter(deadline: when, execute: {
                 self.dismiss(animated: true, completion: nil)
@@ -253,11 +253,15 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
                 return
             }
            
-            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFriendlistID") as! FriendlistViewController
-            self.addChild(mainViewVC)
-            mainViewVC.view.frame = self.view.frame
-            self.view.addSubview(mainViewVC.view)
-            mainViewVC.didMove(toParent: self)
+            for view in self.view.subviews {
+                view.removeFromSuperview()
+            }
+            
+            let secondVC = UIStoryboard(name: "OnBoarding", bundle: nil).instantiateViewController(withIdentifier: "sbSecondViewID") as! SecondViewController
+            self.addChild(secondVC)
+            secondVC.view.frame = self.view.frame
+            self.view.addSubview(secondVC.view)
+            secondVC.didMove(toParent: self)
 //            guard let navController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else { return }
 //            guard let controller = navController.viewControllers[0] as? HomeController else { return }
 //            controller.configureViewComponents()
@@ -370,11 +374,15 @@ extension LoginViewController: GIDSignInDelegate {
             
 //
             
-            let mainViewVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFriendlistID") as! FriendlistViewController
-            self.addChild(mainViewVC)
-            mainViewVC.view.frame = self.view.frame
-            self.view.addSubview(mainViewVC.view)
-            mainViewVC.didMove(toParent: self)
+            for view in self.view.subviews {
+                view.removeFromSuperview()
+            }
+            
+            let secondVC = UIStoryboard(name: "OnBoarding", bundle: nil).instantiateViewController(withIdentifier: "sbSecondViewID") as! SecondViewController
+            self.addChild(secondVC)
+            secondVC.view.frame = self.view.frame
+            self.view.addSubview(secondVC.view)
+            secondVC.didMove(toParent: self)
             
         }
     }

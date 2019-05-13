@@ -27,11 +27,11 @@ class SecondViewController: UIViewController {
         for view in self.view.subviews {
             view.removeFromSuperview()
         }
-        let loginVC = UIStoryboard(name: "Khoi", bundle: nil).instantiateViewController(withIdentifier: "sbLoginID") as! LoginViewController
-        self.addChild(loginVC)
-        loginVC.view.frame = self.view.frame
-        self.view.addSubview(loginVC.view)
-        loginVC.didMove(toParent: self)
+        let thirdVC = UIStoryboard(name: "OnBoarding", bundle: nil).instantiateViewController(withIdentifier: "sbThirdViewID") as! ThirdViewController
+        self.addChild(thirdVC)
+        thirdVC.view.frame = self.view.frame
+        self.view.addSubview(thirdVC.view)
+        thirdVC.didMove(toParent: self)
     }
     
     func showSecondVC() {
