@@ -179,6 +179,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - IGColorPicker
   - JGProgressHUD
+  - M13Checkbox
   - SwiftyJSON
   - TextFieldEffects
   - TinyConstraints
@@ -262,6 +263,6 @@ SPEC CHECKSUMS:
   TextFieldEffects: 7d372f58aeaf9acd9626bbf962680aef926b085d
   TinyConstraints: 03bc091844b98c18dbaead8b1153242a42721b56
 
-PODFILE CHECKSUM: 19771719d2df6529300e0c95621ea32b3712c428
+PODFILE CHECKSUM: 5525bfbfacf48f49ece285f6471bc329dffbfe19
 
 COCOAPODS: 1.6.1

@@ -190,7 +190,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         let lat = place.coordinate.latitude
         let long = place.coordinate.longitude
 
-
         let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
 
 
@@ -480,6 +479,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDel
         let location = locations.last
         let lat = (location?.coordinate.latitude)!
         let long = (location?.coordinate.longitude)!
+        print("\(lat), \(long)")
         let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 17.0)
 
         self.myMapView.animate(to: camera)

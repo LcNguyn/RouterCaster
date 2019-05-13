@@ -61,9 +61,11 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
 //        timeTravelledLb.text = "00:00:36"
 //
 //        // OK version
-//        var staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=\(Int(routeImage.bounds.width))x\(Int(routeImage.bounds.height))&markers=color:green|label:S|\(Double((startMarker?.position.latitude)!)),\(Double((startMarker?.position.longitude)!))&markers=color:red|label:E|\(Double((endMarker?.position.latitude)!)),\(Double((endMarker?.position.longitude)!))&path=weight:4|color:0x3f6e91|enc:s`seFdnbjVZEAQAa@De@DQX_@vBqClA{AFKTNnAbBbDnExAtBrCxDlEbG_DfEoAnBOj@WTgBPq@JkEh@yDd@uKpAyC\\WsDs@qKG_Ba@eG&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
+//        var staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=\(Int(routeImage.bounds.width))x\(Int(routeImage.bounds.height))&markers=color:green|label:S|37.785836,-122.406417&markers=color:red|label:E|37.7886412,-122.407071&path=weight:4|color:0x3f6e91|enc:s`seFdnbjVZEAQAa@De@DQX_@vBqClA{AFKTNnAbBbDnExAtBrCxDlEbG_DfEoAnBOj@WTgBPq@JkEh@yDd@uKpAyC\\WsDs@qKG_Ba@eG&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
         
-        let staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=\(Int(routeImage.bounds.width))x\(Int(routeImage.bounds.height))&markers=color:green|label:S|\(Double((startMarker?.position.latitude)!)),\(Double((startMarker?.position.longitude)!))&markers=color:0x3f6e91|label:E|\(Double((endMarker?.position.latitude)!)),\(Double((endMarker?.position.longitude)!))&path=weight:4|color:red|enc:\(self.myPath!.encodedPath())&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
+        
+        
+        let staticMapUrl: String = "https://maps.googleapis.com/maps/api/staticmap?size=\(Int(routeImage.bounds.width))x\(Int(routeImage.bounds.height))&markers=color:green|label:S|\(Double((startMarker?.position.latitude)!)),\(Double((startMarker?.position.longitude)!))&markers=color:read|label:E|\(Double((endMarker?.position.latitude)!)),\(Double((endMarker?.position.longitude)!))&path=weight:4|color:0x3f6e91|enc:\(self.myPath!.encodedPath())&key=AIzaSyCMYfiszedRS_hcUjJUyRCx9QPsaR2zUPQ"
         
         //        print(self.myPolyline.path?.encodedPath())
         //        print(routeImage.frame.width)
@@ -106,7 +108,7 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
         routeDistanceLb.text?.append(" \(isMetric ? "km" : "mi")")
         timeTravelledLb.text = timeTravelled!.stringFromTimeInterval()
         
-        // For on-barding
+//        // For on-barding
 //        routeDistanceLb.text = "1.3 mi"
 //        timeTravelledLb.text = "00:12:33"
 
@@ -175,7 +177,7 @@ class FinishRouteViewController: UIViewController, UIScrollViewDelegate, GMSMapV
         newContent.photos = [photo]
         dialog.fromViewController = self
         dialog.shareContent = newContent
-        dialog.mode = ShareDialog.Mode.feedWeb
+        dialog.mode = ShareDialog.Mode.native
 //        dialog.delegate = self
         dialog.show()
     }

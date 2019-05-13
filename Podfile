@@ -16,6 +16,7 @@ target 'UITest' do
   pod 'FBSDKShareKit'
   pod 'FBSDKPlacesKit'
   pod 'IGColorPicker'
+  pod 'M13Checkbox'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
@@ -27,7 +28,6 @@ target 'UITest' do
   pod 'TinyConstraints'
   pod 'GoogleSignIn'
   pod 'TextFieldEffects'
-
   
   
 end
