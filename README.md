@@ -19,14 +19,10 @@
 
 
  TABLE OF CONTENTS
- 
-      1. Introduction
-      
-      2. Features
-      
-      3. Diagrams
-      
-      4. Acknowledgments
+ 1. Introduction
+ 2. Features
+ 3. Diagrams
+ 4. Acknowledgments
 
 
 
