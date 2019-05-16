@@ -1,13 +1,13 @@
-# ROUTECASTER
-# RMIT University Vietnam
-# Course: COSC2659 iOS Development
-# Semester: 2019A
-# Assessment: Assignment 3
-# Author: Tang Quang An (s3695273), Nguyen Tuan Loc (s3695769), Nguyen Dinh Anh Khoi (s3695517), Le Minh Kien (s3651471), Le Nghia(s3654028)
-# Created date: 16/05/2019
-# Acknowledgement: 
-#            1. https://firebase.google.com/docs/firestore/manage-data/add-data#update-data
-#            2. https://github.com/rebeloper/FirestoreAuth
+### ROUTECASTER
+### RMIT University Vietnam
+### Course: COSC2659 iOS Development
+### Semester: 2019A
+### Assessment: Assignment 3
+### Author: Tang Quang An (s3695273), Nguyen Tuan Loc (s3695769), Nguyen Dinh Anh Khoi (s3695517), Le Minh Kien (s3651471), Le Nghia(s3654028)
+### Created date: 16/05/2019
+### Acknowledgement: 
+###            1. https://firebase.google.com/docs/firestore/manage-data/add-data#update-data
+###            2. https://github.com/rebeloper/FirestoreAuth
 
 
 # TABLE OF CONTENTS
