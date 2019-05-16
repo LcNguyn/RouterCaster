@@ -1,5 +1,5 @@
 #### RMIT University Vietnam
-#### Course: COSC2659 iOS Development
+#### Course: ###### COSC2659 iOS Development
 #### Semester: 2019A
 #### Assessment: Assignment 3
 #### Author: 
