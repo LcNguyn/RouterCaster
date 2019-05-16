@@ -20,7 +20,7 @@
 
  **TABLE OF CONTENTS**
  1. Introduction [Go to section](#introduction)
- 2. Installation and Setup [Go to section](#installation-and-set-up)
+ 2. Installation and Setup [Go to section](#installation-and-setup)
  3. Features [Go to section](#features)
  4. Diagram [Go to section](#diagram)
  5. Acknowledgment [Go to section](#acknowledgement)
