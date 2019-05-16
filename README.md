@@ -14,26 +14,22 @@
    -  Nguyen Dinh Anh Khoi (s3695517)
    -  Le Minh Kien (s3651471)
    -  Le Nghia (s3654028)
-
 <br/>
 <br/>
-
  TABLE OF CONTENTS
  1. Introduction
  2. Features
  3. Diagrams
  4. Acknowledgments
-
-
-
-
-# 1. Introduction
+<br/>
+<br/>
+# Introduction
   This is a project from group 6 of IOS development course (COSC2659) in semester A2019. It is called Routecaster app, a combination 
   between social and map navigation app which allows users to have their location and route shared to their friends as well as having chat
   feature for conversations. The features will be specifically explained in terms of flow (not fully front-end or back-end explanation) in
   features section below.
 
-# 2. Features
+# Features
  a. Download the application
    - The user will not be able to download and install the app in his/her device. Since the download and installation requires us to 
    follow the terms and rules of Apple and also, the stakeholders does not recommended us to upload to Appstore due to mentioned 
