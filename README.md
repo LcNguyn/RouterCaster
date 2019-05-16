@@ -35,12 +35,12 @@
 
 # Features
  a. Download the application
-   - The user will not be able to download and install the app in his/her device. Since the download and installation requires us to 
+   The user will not be able to download and install the app in his/her device. Since the download and installation requires us to 
    follow the terms and rules of Apple and also, the stakeholders does not recommended us to upload to Appstore due to mentioned 
    reasons, we decided not to do the Appstore upload.
 
  b. Sign up/Log in
-   - Yes, the user can sign up by Facebook, Gmail and even in-app register, log i with the registred account (use email and password 
+   Yes, the user can sign up by Facebook, Gmail and even in-app register, log i with the registred account (use email and password 
    to log in). This features are hugely supported by Firebase.
 
  c. Reset password 
