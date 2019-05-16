@@ -13,15 +13,19 @@
    -  Nguyen Tuan Loc (s3695769)
    -  Nguyen Dinh Anh Khoi (s3695517)
    -  Le Minh Kien (s3651471)
-   -  Le Nghia(s3654028)
+   -  Le Nghia (s3654028)
 
 
 
 
  TABLE OF CONTENTS
+ 
       1. Introduction
+      
       2. Features
+      
       3. Diagrams
+      
       4. Acknowledgments
 
 
