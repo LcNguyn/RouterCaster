@@ -34,22 +34,22 @@
   features section below.
 
 # Features
- ### a. Download the application
+ ###  Download the application
  
    The user will not be able to download and install the app in his/her device. Since the download and installation requires us to 
    follow the terms and rules of Apple and also, the stakeholders does not recommended us to upload to Appstore due to mentioned 
    reasons, we decided not to do the Appstore upload.
 
- ### b. Sign up/Log in
+ ###  Sign up/Log in
  
    Yes, the user can sign up by Facebook, Gmail and even in-app register, log i with the registred account (use email and password 
    to log in). This features are hugely supported by Firebase.
 
- ### c. Reset password 
+ ###  Reset password 
 
- ### d. Onboarding
+ ###  Onboarding
 
- ### e. Tracking their routes and their friend’s routes
+ ###  Tracking their routes and their friend’s routes
 The user will be able to define their start and end points, see the route on their map.
 The user will be able to be able to see the distance (in different units) and estimation time for finishing the route. 
 The user will be able to be notified by the app whenever they are out of the route.
@@ -58,7 +58,7 @@ The user will be able to see their friend’s routes on their map in different c
 The user will be able to see their friend’s current location on their map.
 Once user hit their end point, they will be able to record their actual time and distance for that route.
 
-  ###  f. Manage friends
+  ###  Manage friends
 The user will be able to view their friend list.
 The user will be able to send request to add new friend.
 The user will be able to delete existing friends on their contact.
@@ -66,15 +66,15 @@ The user will be able to send messages to their friends.
 The user will be able to assign different colors to their friend so that it will be able to be displayed on map.
 The user will be able to choose to display their friend’s avatars, name or both on the map with friend’s location.
 
-  ###  g. Share
+  ###  Share
 The user will be able to share their finished route directly to friends in the app.
 The user will be able to share their finished route to social networks
 
- ###   h. Statistic
+ ###  Statistic
 The user will be able to view their finished routes weekly, monthly.
 The user will be able to make comparison between them and their selected friend’s statistics.
 
- ###   i. Manage settings
+ ###  Manage settings
 The user will be able to manage how many routes will be able to be displayed on their map.
 The user will be able to manage their prefer units to input for each route.
 The user will be able to manage their personal account.
