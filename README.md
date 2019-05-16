@@ -79,6 +79,9 @@ The user will be able to manage how many routes will be able to be displayed on 
 The user will be able to manage their prefer units to input for each route.
 The user will be able to manage their personal account.
 
-### Acknowledgement: 
-###            1. https://firebase.google.com/docs/firestore/manage-data/add-data#update-data
-###            2. https://github.com/rebeloper/FirestoreAuth
+# Diagram
+
+# Acknowledgement
+   1. https://firebase.google.com/docs/firestore/manage-data/add-data#update-data
+   
+   2. https://github.com/rebeloper/FirestoreAuth
