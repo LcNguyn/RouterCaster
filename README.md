@@ -19,10 +19,10 @@
 <br/>
 
  **TABLE OF CONTENTS**
- 1. Introduction [->](#introduction)
- 2. Features [->](#features)
- 3. Diagrams [->](#diagrams)
- 4. Acknowledgments [->](#acknowledgments)
+ 1. Introduction [Go to section](#introduction)
+ 2. Features [Go to section](#features)
+ 3. Diagrams [Go to section](#diagrams)
+ 4. Acknowledgments [Go to section](#acknowledgments)
  
 <br/>
 <br/>
