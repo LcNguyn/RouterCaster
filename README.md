@@ -14,15 +14,19 @@
    -  Nguyen Dinh Anh Khoi (s3695517)
    -  Le Minh Kien (s3651471)
    -  Le Nghia (s3654028)
+   
 <br/>
 <br/>
+
  TABLE OF CONTENTS
  1. Introduction
  2. Features
  3. Diagrams
  4. Acknowledgments
+ 
 <br/>
 <br/>
+
 # Introduction
   This is a project from group 6 of IOS development course (COSC2659) in semester A2019. It is called Routecaster app, a combination 
   between social and map navigation app which allows users to have their location and route shared to their friends as well as having chat
