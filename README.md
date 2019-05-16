@@ -20,9 +20,10 @@
 
  **TABLE OF CONTENTS**
  1. Introduction [Go to section](#introduction)
- 2. Features [Go to section](#features)
- 3. Diagram [Go to section](#diagram)
- 4. Acknowledgment [Go to section](#acknowledgement)
+ 2. Installation and Setup [Go to section](#installation-and-set-up)
+ 3. Features [Go to section](#features)
+ 4. Diagram [Go to section](#diagram)
+ 5. Acknowledgment [Go to section](#acknowledgement)
  
 <br/>
 <br/>
@@ -32,6 +33,8 @@
   between social and map navigation app which allows users to have their location and route shared to their friends as well as having chat
   feature for conversations. The features will be specifically explained in terms of flow (not fully front-end or back-end explanation) in
   features section below.
+  
+# Installation and Setup
 
 # Features
  ###  Download the application
