@@ -50,21 +50,13 @@
  ###  Onboarding
 
  ###  Tracking their routes and their friend’s routes
-The user will be able to define their start and end points, see the route on their map.
-The user will be able to be able to see the distance (in different units) and estimation time for finishing the route. 
-The user will be able to be notified by the app whenever they are out of the route.
-The user location is kept up-to-date in real time.
-The user will be able to see their friend’s routes on their map in different colors.
-The user will be able to see their friend’s current location on their map.
-Once user hit their end point, they will be able to record their actual time and distance for that route.
+The user' location is kept in realtime. Furthermore, he/she is allowed their start and end points and see the route on their map. The user will be able to assign different colors to their friends'route so that it will be able to be displayed on map. Also, distance (in different units) and estimation time for finishing the route will be shown in our app. When the user is out of route, they will be notified.
+
+The user can choose to see the specific friend’s routes or their current location (or both) on their map in different colors. And once user come to their end point, they will be able to record their actual time and distance for that route.
 
   ###  Manage friends
-The user will be able to view their friend list.
-The user will be able to send request to add new friend.
-The user will be able to delete existing friends on their contact.
-The user will be able to send messages to their friends.
-The user will be able to assign different colors to their friend so that it will be able to be displayed on map.
-The user will be able to choose to display their friend’s avatars, name or both on the map with friend’s location.
+The user will be able to view their friend list, send request to add new friend, delete existing friends on their contact.
+The user can also send messages to their friends.
 
   ###  Share
 The user will be able to share their finished route directly to friends in the app.
@@ -75,6 +67,7 @@ The user will be able to view their finished routes weekly, monthly.
 The user will be able to make comparison between them and their selected friend’s statistics.
 
  ###  Manage settings
+The user will be able to choose to display their friend’s avatars, name or both on the map with friend’s location
 The user will be able to manage how many routes will be able to be displayed on their map.
 The user will be able to manage their prefer units to input for each route.
 The user will be able to manage their personal account.
