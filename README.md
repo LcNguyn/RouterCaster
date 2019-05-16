@@ -22,7 +22,7 @@
  1. Introduction [Go to section](#introduction)
  2. Features [Go to section](#features)
  3. Diagrams [Go to section](#diagrams)
- 4. Acknowledgment [Go to section](#acknowledgment)
+ 4. Acknowledgment [Go to section](#acknowledgement)
  
 <br/>
 <br/>
