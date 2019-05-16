@@ -19,7 +19,7 @@
 <br/>
 
  **TABLE OF CONTENTS**
- [Go to](#introduction) 1. Introduction
+ 1. Introduction(#introduction)
  2. Features
  3. Diagrams
  4. Acknowledgments
