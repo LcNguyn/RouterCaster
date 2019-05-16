@@ -1,14 +1,14 @@
- RMIT University Vietnam
+ **RMIT University Vietnam**
  
- Course: COSC2659 iOS Development
+ **Course:** COSC2659 iOS Development
  
- Semester: 2019A
+ **Semester:** 2019A
  
- Assessment: Assignment 3
+ **Assessment:** Assignment 3
  
- Created date: 16/05/2019
+ **Created date:** 16/05/2019
  
- Author: 
+ **Author:** 
    -  Tang Quang An (s3695273)
    -  Nguyen Tuan Loc (s3695769)
    -  Nguyen Dinh Anh Khoi (s3695517)
@@ -18,7 +18,7 @@
 <br/>
 <br/>
 
- TABLE OF CONTENTS
+ **TABLE OF CONTENTS**
  1. Introduction
  2. Features
  3. Diagrams
